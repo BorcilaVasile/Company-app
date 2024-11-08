@@ -1,0 +1,267 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|c:\\users\\huawei\\documents\\facultate\\anul 3\\administrare_baze_de_date\\administrare_firma\\mwm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\viewmodel\\managersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\viewmodel\\managersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mainpagewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mainpagewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mainpagewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mainpagewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\viewmodel\\employeesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\viewmodel\\employeesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\view\\employeesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\view\\employeesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\view\\managersview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\view\\managersview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\viewmodel\\departmentsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\viewmodel\\departmentsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\view\\departmentsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\view\\departmentsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\viewmodel\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\viewmodel\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\mwm\\view\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:mwm\\view\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\theme\\menubuttontheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{44B2B6BE-81F1-4565-B29D-C97CE8EB33D9}|Administrare_firma.csproj|solutionrelative:theme\\menubuttontheme.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 747,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 989,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:55:13.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainPageWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainPageWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainPageWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainPageWindow.xaml.cs",
+              "RelativeToolTip": "MainPageWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:55:10.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EmployeesView.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\EmployeesView.xaml",
+              "RelativeDocumentMoniker": "MWM\\View\\EmployeesView.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\EmployeesView.xaml",
+              "RelativeToolTip": "MWM\\View\\EmployeesView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-06T15:51:42.862Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmployeesViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\EmployeesViewModel.cs",
+              "RelativeDocumentMoniker": "MWM\\ViewModel\\EmployeesViewModel.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\EmployeesViewModel.cs",
+              "RelativeToolTip": "MWM\\ViewModel\\EmployeesViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:51:22.495Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ManagersView.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\ManagersView.xaml",
+              "RelativeDocumentMoniker": "MWM\\View\\ManagersView.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\ManagersView.xaml",
+              "RelativeToolTip": "MWM\\View\\ManagersView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-06T15:50:40.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ManagersViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\ManagersViewModel.cs",
+              "RelativeDocumentMoniker": "MWM\\ViewModel\\ManagersViewModel.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\ManagersViewModel.cs",
+              "RelativeToolTip": "MWM\\ViewModel\\ManagersViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:50:03.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DepartmentsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\DepartmentsViewModel.cs",
+              "RelativeDocumentMoniker": "MWM\\ViewModel\\DepartmentsViewModel.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\DepartmentsViewModel.cs",
+              "RelativeToolTip": "MWM\\ViewModel\\DepartmentsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:23:04.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DepartmentsView.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\DepartmentsView.xaml",
+              "RelativeDocumentMoniker": "MWM\\View\\DepartmentsView.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\DepartmentsView.xaml",
+              "RelativeToolTip": "MWM\\View\\DepartmentsView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-06T15:21:53.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "MWM\\ViewModel\\HomeViewModel.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\HomeViewModel.cs",
+              "RelativeToolTip": "MWM\\ViewModel\\HomeViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:18:36.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HomeView.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\HomeView.xaml",
+              "RelativeDocumentMoniker": "MWM\\View\\HomeView.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\View\\HomeView.xaml",
+              "RelativeToolTip": "MWM\\View\\HomeView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-06T15:18:28.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "MWM\\ViewModel\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MWM\\ViewModel\\MainViewModel.cs",
+              "RelativeToolTip": "MWM\\ViewModel\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T14:40:23.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-05T20:56:43.03Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MenuButtonTheme.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\Theme\\MenuButtonTheme.xaml",
+              "RelativeDocumentMoniker": "Theme\\MenuButtonTheme.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\Theme\\MenuButtonTheme.xaml",
+              "RelativeToolTip": "Theme\\MenuButtonTheme.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-05T19:06:24.292Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainPageWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainPageWindow.xaml",
+              "RelativeDocumentMoniker": "MainPageWindow.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\MainPageWindow.xaml",
+              "RelativeToolTip": "MainPageWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-05T18:36:39.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\App.xaml",
+              "RelativeDocumentMoniker": "App.xaml",
+              "ToolTip": "C:\\Users\\HUAWEI\\Documents\\Facultate\\Anul 3\\Administrare_baze_de_date\\Administrare_firma\\App.xaml",
+              "RelativeToolTip": "App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-03T10:11:17.459Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
