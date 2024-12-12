@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Style for the TextBlock -->
+    <Style x:Key="DepartmentCardTitleTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,10,0,5"/>
+        <Setter Property="Foreground" Value="#0078D4"/>
+        <Setter Property="FontWeight" Value="ExtraBold"/>
+    </Style>
+
+    <!-- Style for the TextBlock -->
+    <Style x:Key="DepartmentCardSubtitleTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,5,0,15"/>
+        <Setter Property="Foreground" Value="#444"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!-- Style for border-->
+    <Style x:Key="DepartmentCardBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="white"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="350"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="#3C3C3C"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                    To="#f3f4f8"
+                                    Duration="0:0:0.2" />
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                    To="#0078D4"
+                                    Duration="0:0:0.2" />
+                            <ThicknessAnimation Storyboard.TargetProperty="(Border.BorderThickness)"
+                                     To="9"
+                                     Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.01" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                    To="White"
+                                    Duration="0:0:0.2" />
+                            <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                    To="#3C3C3C"
+                                    Duration="0:0:0.2" />
+                            <ThicknessAnimation Storyboard.TargetProperty="(Border.BorderThickness)"
+                                     To="0"
+                                     Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1" ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+    
+    <!--Style for button-->
+    <Style x:Key="DepartmentCardButtonStyle" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="#5E5ADB"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="#5E5ADB"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Padding" Value="5,2"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#5E5ADB"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

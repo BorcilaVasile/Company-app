@@ -98,6 +98,7 @@
       <Association Name="Employee_Evaluation1" Member="Evaluations1" ThisKey="ID" OtherKey="ID_manager" Type="Evaluation" />
       <Association Name="Employee_Training_assignment" Member="Training_assignments" ThisKey="ID" OtherKey="ID_employee" Type="Training_assignment" />
       <Association Name="Employee_User_employee" Member="User_employees" ThisKey="ID" OtherKey="ID_employee" Type="User_employee" />
+      <Association Name="Employee_Account" Member="Accounts" ThisKey="ID" OtherKey="EmployeeID" Type="Account" />
       <Association Name="Department_Employee" Member="Department" ThisKey="ID_department" OtherKey="ID_department" Type="Department" IsForeignKey="true" />
       <Association Name="Post_Employee" Member="Post" ThisKey="ID_post" OtherKey="ID_post" Type="Post" IsForeignKey="true" />
     </Type>
@@ -166,6 +167,15 @@
       <Column Name="Status" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
       <Association Name="Employee_User_employee" Member="Employee" ThisKey="ID_employee" OtherKey="ID" Type="Employee" IsForeignKey="true" />
       <Association Name="Role_User_employee" Member="Role" ThisKey="ID_role" OtherKey="ID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Accounts" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_Account" Member="Employee" ThisKey="EmployeeID" OtherKey="ID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

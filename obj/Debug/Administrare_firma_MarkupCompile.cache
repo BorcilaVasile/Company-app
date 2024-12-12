@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\App.xaml
-8-1259910782
+14815467104
 
-171086608341
-13-1310406943
-MainPageWindow.xaml;MainWindow.xaml;MWM\View\DepartmentsView.xaml;MWM\View\EmployeesView.xaml;MWM\View\HomeView.xaml;MWM\View\ManagersView.xaml;Theme\LoginPage.xaml;Theme\MenuButtonTheme.xaml;
+26470575481
+141458853696
+MVVM\View\MainPageWindow.xaml;MVVM\View\DepartmentDetailsView.xaml;MVVM\View\DepartmentsView.xaml;MVVM\View\EmployeesView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginView.xaml;MVVM\View\MainView.xaml;MVVM\View\ManagersView.xaml;MVVM\View\SignUpView.xaml;Theme\DepartmentCard.xaml;Theme\DepartmentDetailsLayout.xaml;Theme\LoginPage.xaml;Theme\MenuButtonTheme.xaml;Theme\TabLayout.xaml;
 
 False
 
