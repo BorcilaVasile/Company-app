@@ -2,6 +2,7 @@
 using Administrare_firma.Core;
 using Administrare_firma.MVVM.Model;
 using Administrare_firma.MVVM.ViewModel;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -41,24 +42,81 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 var query = from department in context.Departments
                             join manager in context.Employees
-                            on department.ID_department equals manager.ID_department
-                            join post in context.Posts
-                            on manager.ID_post equals post.ID_post
-                            where post.Level_of_importance == 3
+                            on department.ID_department equals manager.ID_department into managerGroup
+                            from manager in managerGroup
+                            .Where(m => (context.Posts
+                                   .Where(p => p.ID_post == m.ID_post)
+                                   .Select(p => (int?)p.Level_of_importance)
+                                   .FirstOrDefault() ?? -1) == 3)
+                                .DefaultIfEmpty() 
                             select new DepartmentWithManager
                             {
                                 Department = department,
-                                Manager = manager
+                                Manager = manager // Poate fi null
                             };
 
                 DepartmentsWithManagers.Clear();
 
                 foreach (var item in query)
                 {
-                    DepartmentsWithManagers.Add(item);
+                    var employees = context.Employees
+                        .Where(e => e.ID_department == item.Department.ID_department)
+                        .Select(e => new
+                        {
+                            e.ID,
+                            e.ID_department,
+                            e.First_name,
+                            e.Last_name,
+                            e.CNP,
+                            e.Date_of_birth,
+                            e.Home_address,
+                            e.Email,
+                            e.Phone_number,
+                            e.ID_post,
+                            e.Base_salary,
+                            e.Status,
+                            e.Contract_period,
+                            e.Contract_type,
+                            Post = context.Posts
+                                .Where(p => p.ID_post == e.ID_post)
+                                .FirstOrDefault(),
+                            IsManager = context.Posts
+                                .Where(p => p.ID_post == e.ID_post)
+                                .Select(p => (bool?)(p.Level_of_importance == 3))
+                                .FirstOrDefault()
+                        })
+                        .ToList();
+
+                    item.Departments_employees = new ObservableCollection<Employee_informations>(
+                        employees.Select(e => new Employee_informations
+                        {
+                            Employee_user = new Employee
+                            {
+                                ID = e.ID,
+                                ID_department = e.ID_department,
+                                First_name = e.First_name,
+                                Last_name = e.Last_name,
+                                CNP = e.CNP,
+                                Date_of_birth = e.Date_of_birth,
+                                Home_address = e.Home_address,
+                                Email = e.Email,
+                                Phone_number = e.Phone_number,
+                                ID_post = e.ID_post,
+                                Base_salary = e.Base_salary,
+                                Status = e.Status,
+                                Contract_period = e.Contract_period,
+                                Contract_type = e.Contract_type,
+                            },
+                            Post = e.Post,
+                            Department = item.Department,
+                            IsManager = e.IsManager
+                        })
+                    );
+                DepartmentsWithManagers.Add(item );
                 }
             }
         }
+
 
         private void ExecuteNavigateToDepartmentDetails(object parameter)
         {
@@ -68,6 +126,7 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 _mainViewModel.NavigateToDepartmentDetailsView(departmentWithManager);
             }
+
         }
     }
 }

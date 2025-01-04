@@ -4,7 +4,19 @@
              xmlns:viewModel="clr-namespace:Administrare_firma.MVVM.ViewModel"
              xmlns:local="clr-namespace:Administrare_firma" 
              xmlns:view="clr-namespace:Administrare_firma.MVVM.View" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:core="clr-namespace:Administrare_firma.Core">
+
+    <UserControl.DataContext>
+        <viewModel:SignUpViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <core:MultiColorConverter x:Key="MultiColorConverter"/>
+    </UserControl.Resources>
+
+
+
     <Grid>
         <Border Height="300" VerticalAlignment="Top">
             <Border.Background>
@@ -18,14 +30,16 @@
             </Border.Background>
         </Border>
         <Path Fill="White" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" 
-                 Data="M 0,-120 L 930,-200 L 930,200 L 0,200 Z" Margin="0,-10,0,0" Width="920">
+                Data="M 0,-150 L 930,-200 L 930,200 L 0,200 Z" Margin="0,-10,0,0" Width="920">
             <Path.RenderTransform>
                 <TranslateTransform X="0" Y="200" />
             </Path.RenderTransform>
         </Path>
         <Border Width="920" Height="600" CornerRadius="30" >
             <Grid>
-                <Border CornerRadius="15" Width="400" Height="450">
+                <Border CornerRadius="15" 
+                        Width="400" 
+                        Height="450">
                     <Border.Effect>
                         <DropShadowEffect Color="#3A7CA5" 
                                           BlurRadius="15" 
@@ -44,7 +58,7 @@
                                         VerticalAlignment="Center" 
                                         FontSize="20"
                                         Foreground="#1E1B39"
-                                        FontWeight="DemiBold"
+                                        FontWeight="Heavy"
                                         Margin="0,20,0,0"/>
 
                             <TextBlock Text="Quick and Simple way to interact with your company"
@@ -52,85 +66,153 @@
                                         Foreground="Gray"
                                         TextAlignment="Center"
                                         Margin="0,10,0,10" />
-
-                            <TextBox Text="Enter your first name"
-                                     Margin="0,10,0,5"
-                                     Height="40"
-                                     FontSize="14"
-                                     VerticalContentAlignment="Center"
-                                     BorderBrush="Gray"
-                                     BorderThickness="1"
-                                     Opacity="0.5"
-                                     Padding="10"
-                                     Width="250"/>
-                            <TextBox Text="Enter your last name"
-                                     Margin="0,10,0,5"
-                                     Height="40"
-                                     FontSize="14"
-                                     VerticalContentAlignment="Center"
-                                     BorderBrush="Gray"
-                                     BorderThickness="1"
-                                     Opacity="0.5"
-                                     Padding="10"
-                                     Width="250"/>
-
-                            <TextBox Text="Enter your username"
-                                    Margin="0,10,0,5"
-                                    Height="40"
-                                    FontSize="14"
-                                    VerticalContentAlignment="Center"
-                                    BorderBrush="Gray"
-                                    BorderThickness="1"
-                                    Opacity="0.5"
-                                    Padding="10"
-                                    Width="250"/>
-
-                            <TextBox Text="Enter your e-mail address"
-                                    Margin="0,10,0,5"
-                                    Height="40"
-                                    FontSize="14"
-                                    VerticalContentAlignment="Center"
-                                    BorderBrush="Gray"
-                                    BorderThickness="1"
-                                    Opacity="0.5"
-                                    Padding="10"
-                                    Width="250"/>
+                            <StackPanel Orientation="Vertical"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <StackPanel Style="{StaticResource InputSignUpStackPanel}">
+                                    <TextBlock Text="Enter your full name"
+                                           Style="{StaticResource InputLabelTopText}"
+                                           Foreground="{Binding NameInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}"
+                                           Visibility="{Binding FullnameIsFocused, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=UpText}" />
 
 
-                            <Grid Width="250" Margin="0,10,0,0" Opacity="0.5">
-                                <PasswordBox Name="PasswordBox"
-                                            Margin="0,5,0,20"
-                                            Height="40"
-                                            FontSize="14"
-                                            VerticalAlignment="Center"
-                                            Padding="10"
-                                            BorderBrush="Gray"
-                                            BorderThickness="1" />
-                                <TextBlock Text="👁" 
-                                           FontSize="14" 
-                                           Foreground="Gray" 
-                                           HorizontalAlignment="Right" 
-                                           VerticalAlignment="Center"
-                                           Margin="0,0,10,15"
-                                           Cursor="Hand" />
-                            </Grid>
+                                    <Border BorderBrush="{Binding NameInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}" 
+                                        Style="{StaticResource InputBorder}">
+                                        <Grid>
+                                            <TextBlock Text="Full name"
+                                                   Style="{StaticResource InputLabelDownText}"
+                                                   Foreground="{Binding NameInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}"
+                                                   Visibility="{Binding FullnameIsFocused, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <TextBox Name="FullnameBox"
+                                                 Text="{Binding Fullname, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource InputTextBox}"
+                                                 GotFocus="TextBox_GotFocus"
+                                                 LostFocus="TextBox_LostFocus"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+
+                                <StackPanel Style="{StaticResource InputSignUpStackPanel}">
+                                    <TextBlock Text="Enter your e-mail address"
+                                           Style="{StaticResource InputLabelTopText}"
+                                           Foreground="{Binding EmailInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}"
+                                           Visibility="{Binding EmailIsFocused, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=UpText}" />
+
+
+                                    <Border BorderBrush="{Binding EmailInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}" 
+                                        Style="{StaticResource InputBorder}">
+                                        <Grid>
+                                            <TextBlock Text="E-mail address"
+                                                   Style="{StaticResource InputLabelDownText}"
+                                                   Foreground="{Binding EmailInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}"
+                                                   Visibility="{Binding EmailIsFocused, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <TextBox Name="EmailBox"
+                                                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource InputTextBox}"
+                                                 GotFocus="TextBox_GotFocus"
+                                                 LostFocus="TextBox_LostFocus"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource InputSignUpStackPanel}" >
+                                    <TextBlock Text="Enter your password"
+                                           Style="{StaticResource InputLabelTopText}"
+                                           Visibility="{Binding PasswordIsFocused, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=UpText}">
+                                        <TextBlock.Foreground>
+                                            <MultiBinding Converter="{StaticResource MultiColorConverter}">
+                                                <Binding Path="PasswordsMatch"/>
+                                                <Binding Path="InputIsWrong"/>
+                                            </MultiBinding>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <Border BorderBrush="{Binding PasswordInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}" 
+                                        Style="{StaticResource InputBorder}">
+                                        <Grid>
+                                            <TextBlock Text="Password"
+                                                    Style="{StaticResource InputLabelDownText}"
+                                                    FocusVisualStyle="{x:Null}"
+                                                    Visibility="{Binding PasswordIsFocused, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <TextBlock.Foreground>
+                                                    <MultiBinding Converter="{StaticResource MultiColorConverter}">
+                                                        <Binding Path="PasswordsMatch"/>
+                                                        <Binding Path="PasswordInputIsWrong"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Foreground>
+                                            </TextBlock>
+                                            <TextBox x:Name="PasswordVisibleBox"
+                                                 Text="{Binding Password,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource InputPasswordVisibleBox}"
+                                                 GotFocus="PasswordBox_GotFocus"
+                                                 LostFocus="PasswordBox_LostFocus"/>
+                                            <PasswordBox Name="PasswordBox"
+                                                    PasswordChanged="PasswordBox_PasswordChanged"
+                                                    Style="{StaticResource InputPassword}"
+                                                    GotFocus="PasswordBox_GotFocus"
+                                                    LostFocus="PasswordBox_LostFocus"/>
+                                            <TextBlock Style="{StaticResource InputPasswordIcon}"
+                                                   MouseLeftButtonUp="TogglePasswordVisibility"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource InputSignUpStackPanel}">
+                                    <TextBlock Text="Re-enter your password"
+                                           Style="{StaticResource InputLabelTopText}"
+                                           Visibility="{Binding ConfirmPasswordIsFocused, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=UpText}">
+                                        <TextBlock.Foreground>
+                                            <MultiBinding Converter="{StaticResource MultiColorConverter}">
+                                                <Binding Path="PasswordsMatch"/>
+                                                <Binding Path="ConfirmPasswordInputIsWrong"/>
+                                            </MultiBinding>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <Border BorderBrush="{Binding ConfirmPasswordInputIsWrong, Converter={StaticResource BoolToForegroundColorConverter}}" 
+                                        Style="{StaticResource InputBorder}">
+                                        <Grid>
+                                            <TextBlock Text="Confirm password"
+                                                    Style="{StaticResource InputLabelDownText}"
+                                                    FocusVisualStyle="{x:Null}"
+                                                    Visibility="{Binding ConfirmPasswordIsFocused, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <TextBlock.Foreground>
+                                                    <MultiBinding Converter="{StaticResource MultiColorConverter}">
+                                                        <Binding Path="PasswordsMatch"/>
+                                                        <Binding Path="ConfirmPasswordInputIsWrong"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Foreground>
+                                            </TextBlock>
+                                            <TextBox x:Name="ConfirmPasswordVisibleBox"
+                                                 Text="{Binding ConfirmPassword,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 Style="{StaticResource InputPasswordVisibleBox}"
+                                                 GotFocus="PasswordBox_GotFocus"
+                                                 LostFocus="PasswordBox_LostFocus"/>
+                                            <PasswordBox Name="ConfirmPasswordBox"
+                                                    PasswordChanged="ConfirmPasswordBox_PasswordChanged"
+                                                    Style="{StaticResource InputPassword}"
+                                                    GotFocus="PasswordBox_GotFocus"
+                                                    LostFocus="PasswordBox_LostFocus"/>
+                                            <TextBlock Style="{StaticResource InputPasswordIcon}"
+                                                   MouseLeftButtonUp="ToggleConfirmPasswordVisibility"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
+                                <TextBlock Text="Passwords do not match"
+                                           Foreground="Red"
+                                           HorizontalAlignment="Center"
+                                           Visibility="{Binding PasswordsMatch, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                            </StackPanel>
 
                             <Button Content="Create account"
-                                    Height="40"
-                                    Width="120"
-                                    Background="Black"
-                                    Foreground="White"
-                                    FontSize="14"
-                                    FontWeight="Bold"
-                                    BorderThickness="0"
-                                    Cursor="Hand" 
-                                    Command="{Binding SignUpCommand}" />
+                                    Style="{StaticResource GradientButtonStyle}"
+                                    Command="{Binding SignUpCommand}"/>
+
+
 
                             <TextBlock Text="© 2024 All Rights Reserved. Elysium"
                                 FontSize="12"
                                 Foreground="Gray"
                                 TextAlignment="Center"
-                                Margin="0,10,0,0" />
+                                VerticalAlignment="Bottom"
+                                Margin="0,15,0,0" />
                         </StackPanel>
                     </Grid>
                 </Border>

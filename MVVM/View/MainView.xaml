@@ -4,29 +4,30 @@
             xmlns:viewModel="clr-namespace:Administrare_firma.MVVM.ViewModel"
             xmlns:local="clr-namespace:Administrare_firma"
 			xmlns:view="clr-namespace:Administrare_firma.MVVM.View"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
-    <Grid>
-        <Border Background="white"
-                CornerRadius="20">
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" >
+    <Grid Background="Transparent">
+        <Border Background="White" CornerRadius="0,15,0,15">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="199*"/>
+                    <RowDefinition Height="300*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="200"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="180"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Vertical" Grid.RowSpan="2">
+                <StackPanel Orientation="Vertical" Grid.RowSpan="3">
                     <Border BorderThickness="0,0,0,1"
                             BorderBrush="#5E5ADB">
                         <TextBlock Text="Elysium" 
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Margin="25"
-                       Foreground="Gray"
-                       FontSize="22"
-                       FontFamily="Fonts/Popins"/>
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="25"
+                                       Foreground="Gray"
+                                       FontSize="22"
+                                       FontFamily="Fonts/Popins"/>
                     </Border>
 
                     <StackPanel Grid.Row="1">
@@ -42,37 +43,37 @@
                                       Foreground="white"
                                       FontSize="14"
                                       Style="{StaticResource MenuButtonTheme}"
-                                      IsChecked="True"
+                                      IsChecked="False"
                                       Command="{Binding DepartmentsViewCommand}"/>
                         <RadioButton Content="Managers"
                                       Height="50"
                                       Foreground="white"
                                       FontSize="14"
                                       Style="{StaticResource MenuButtonTheme}"
-                                      IsChecked="True"
+                                      IsChecked="False"
                                       Command="{Binding ManagersViewCommand}"/>
                         <RadioButton Content="Employees"
                                        Height="50"
                                        Foreground="white"
                                        FontSize="14"
                                        Style="{StaticResource MenuButtonTheme}"
-                                       IsChecked="True"
+                                       IsChecked="False"
                                        Command="{Binding EmployeesViewCommand}"/>
                     </StackPanel>
-                </StackPanel>
-                <ContentControl Grid.Column="1"
-                                Content="{Binding CurrentView}"
-                                Grid.RowSpan="2"/>
-                <Border CornerRadius="20,0,0,0" Grid.RowSpan="2">
                     <RadioButton Content="Logout"
                                         Height="50"
                                         Foreground="white"
                                         FontSize="14"
-                                        VerticalAlignment="Bottom"
                                         Style="{StaticResource MenuButtonTheme}"
                                         IsChecked="{x:Null}"
-                                        Command="{Binding LogoutCommand}"/>
-                </Border>
+                                        Command="{Binding LogoutCommand}"
+                                        Grid.Row="2"/>
+                </StackPanel>
+                
+
+                <ContentControl Grid.Column="1"
+                                Content="{Binding CurrentView}"
+                                Grid.RowSpan="3"/>
             </Grid>
 
         </Border>

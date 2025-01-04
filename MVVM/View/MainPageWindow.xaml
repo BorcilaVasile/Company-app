@@ -10,15 +10,39 @@
         Height="600" 
         Width="920"
         HorizontalAlignment="Center"
-        VerticalAlignment="Center"
+        VerticalAlignment="Bottom"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="White"
-        AllowsTransparency="True">
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.DataContext>
         <viewModel:MainPageViewModel/>
     </Window.DataContext>
-    <Grid>
-        <ContentControl Content="{Binding CurrentView}" />
-    </Grid>
+    <Border CornerRadius="15" Background="#81C3D7" BorderBrush="Gray">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" 
+                    Grid.Row="0" 
+                    Background="Transparent" 
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right">
+                <Button Content="-" 
+                    Command="{Binding MinimizeCommand}" 
+                    Style="{StaticResource MinimizeButtonStyle}"/>
+                <Button Content="x" Command="{Binding CloseCommand}" 
+                    Style="{StaticResource CloseButtonStyle}" />
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Border CornerRadius="15">
+                    <ContentControl Content="{Binding CurrentView}"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

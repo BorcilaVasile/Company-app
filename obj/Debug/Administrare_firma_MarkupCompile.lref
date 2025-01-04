@@ -1,5 +1,8 @@
 ﻿
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\App.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\AddEmployeeView.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\EmployeeDetailsView.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\EmployeeEditView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\MainPageWindow.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\DepartmentDetailsView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\DepartmentsView.xaml;;
@@ -9,4 +12,6 @@ FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\MainView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\ManagersView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\SignUpView.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\Theme\InputField.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\RequestDetailsView.xaml;;
 

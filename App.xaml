@@ -14,6 +14,8 @@
                 <ResourceDictionary Source="Theme/DepartmentCard.xaml"/>
                 <ResourceDictionary Source="Theme/TabLayout.xaml"/>
                 <ResourceDictionary Source="Theme/DepartmentDEtailsLayout.xaml"/>
+                <ResourceDictionary Source="Theme/InputField.xaml"/>
+                <ResourceDictionary Source="Theme/Button.xaml"/>
             </ResourceDictionary.MergedDictionaries>
            
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
@@ -30,6 +32,15 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:DepartmentDetailsViewModel}">
                 <view:DepartmentDetailsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EmployeeDetailsViewModel}">
+                <view:EmployeeDetailsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EmployeeEditViewModel}">
+                <view:EmployeeEditView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:AddEmployeeViewModel}">
+                <view:AddEmployeeView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
                 <view:LoginView/>

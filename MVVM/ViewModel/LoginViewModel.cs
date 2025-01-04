@@ -9,26 +9,63 @@ namespace Administrare_firma.MVVM.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private string _username;
+        private string _email;
         private string _password;
+        public bool _emailIsFocused;
+        public bool _passwordIsFocused;
+        public bool _inputIsWrong;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Username
+        public bool InputIsWrong
         {
-            get => _username;
+            get => _inputIsWrong;
             set
             {
-                if (_username != value)
+                if (_inputIsWrong != value)
                 {
-                    _username = value;
-                    OnPropertyChanged(nameof(Username));
+                    _inputIsWrong = value;
+                    OnPropertyChanged(nameof(InputIsWrong));
+                }
+            }
+        }
+        public bool EmailIsFocused
+        {
+            get => _emailIsFocused;
+            set   
+            {
+                if (_emailIsFocused != value)
+                {
+                    _emailIsFocused = value;
+                    OnPropertyChanged(nameof(EmailIsFocused));
+                }
+            }
+        }
+        public bool PasswordIsFocused
+        {
+            get => _passwordIsFocused;
+            set
+            {
+                if (_passwordIsFocused != value)
+                {
+                    _passwordIsFocused = value;
+                    OnPropertyChanged(nameof(PasswordIsFocused));
+                }
+            }
+        }
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged(nameof(Email));
                     ((RelayCommand)LoginCommand).RaiseCanExecuteChanged();
                 }
             }
         }
-
-
         public string Password
         {
             get => _password;
@@ -54,26 +91,24 @@ namespace Administrare_firma.MVVM.ViewModel
 
         private void ExecuteLogin()
         {
+            MainPageViewModel.Instance.NavigateToMainView();
+            //using (var context = new CompanyDataContext())
+            //{
+            //    var query = context.Accounts
+            //        .FirstOrDefault(account => account.Email == _email && account.Password == _password);
 
-            using (var context = new CompanyDataContext())
-            {
-                var query = context.Accounts
-                    .FirstOrDefault(account => account.Username == _username && account.Password == _password);
-
-                if (query != null)
-                {
-                    MainPageViewModel.Instance.NavigateToMainView();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid username or password. Please try again.");
-                }
-            }
+            //    if (query != null)
+            //    {
+            //        MainPageViewModel.Instance.NavigateToMainView();
+            //    }
+            //    else
+            //        InputIsWrong = true;
+            //}
         }
 
         private bool CanExecuteLogin(object parameter)
         {
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
+            return !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password);
         }
 
         private void ExecuteSignUp()
@@ -86,4 +121,6 @@ namespace Administrare_firma.MVVM.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
+
 }

@@ -7,7 +7,8 @@
              xmlns:viewmodel="clr-namespace:Administrare_firma.MVVM.ViewModel" 
              d:DataContext="{d:DesignInstance Type=viewmodel:DepartmentDetailsViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450" 
+             d:DesignWidth="800"
              Background="#4F646F">
     <Grid>
         <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
@@ -18,9 +19,196 @@
                         <TextBlock Text="{Binding CurrentDepartment.Department.Nume}" Margin="13" Style="{StaticResource TextBlockLayout}"/>
                     </StackPanel>
                 </Border>
-                <StackPanel>
-                    <TextBlock Text="{Binding CurrentDepartment.ManagerFullName}" />
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" 
+                               FontWeight="SemiBold" 
+                               FontSize="16" 
+                               Foreground="White" 
+                               Margin="5,0,0,0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Position" 
+                                FontWeight="SemiBold" 
+                                FontSize="16" 
+                                Foreground="White" 
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Center"
+                                Grid.Column="1"/>
+                    <TextBlock Text="Email" 
+                               FontWeight="SemiBold" 
+                               FontSize="16" 
+                               Foreground="White" 
+                               Margin="5,0,0,0"
+                               HorizontalAlignment="Center"
+                               Grid.Column="2"/>
+                    <TextBlock Text="Phone number" 
+                               FontWeight="SemiBold" 
+                               FontSize="16" 
+                               Foreground="White" 
+                               Margin="5,0,0,0"
+                               HorizontalAlignment="Left"
+                               Grid.Column="3"/>
+                </Grid>
+                <ItemsControl ItemsSource="{Binding CurrentDepartment.Departments_employees}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding IsManager, Converter={StaticResource BoolToForegroundColorConverter},ConverterParameter=Manager}" 
+                                    CornerRadius="10" 
+                                    Margin="10,0,10,5" 
+                                    Padding="10" 
+                                    BorderBrush="#CCCCCC" 
+                                    BorderThickness="1">
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" 
+                                                Grid.Column="0"
+                                                HorizontalAlignment="Left">
+                                        <TextBlock Text="{Binding Employee_user.First_name}" 
+                                               Margin="5,0,0,0"  
+                                               FontSize="14" 
+                                               FontWeight="Normal" 
+                                               Foreground="#333333"/>
+                                        <TextBlock Text="{Binding Employee_user.Last_name}" 
+                                               Margin="5,0,0,0"  
+                                               FontSize="14" 
+                                               FontWeight="Normal" 
+                                               Foreground="#333333"/>
+                                    </StackPanel>
+                                    <!-- Ajustează spațierea dacă este necesar -->
+                                    <TextBlock Text="{Binding Post.Nume}"  
+                                               Margin="5,0,0,0" 
+                                               FontSize="14" 
+                                               FontWeight="Normal" 
+                                               Foreground="#333333" 
+                                               HorizontalAlignment="Left"
+                                               Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Employee_user.Email}"  
+                                               Margin="5,0,0,0" 
+                                               FontSize="14" 
+                                               FontWeight="Normal" 
+                                               Foreground="#333333" 
+                                               HorizontalAlignment="Left"
+                                               Grid.Column="2"/>
+                                    <TextBlock Text="{Binding Employee_user.Phone_number}" 
+                                               Margin="5,0,0,0"  
+                                               FontSize="14" 
+                                               FontWeight="Normal" 
+                                               Foreground="#333333" 
+                                               HorizontalAlignment="Left"
+                                               Grid.Column="3"/>
+                                    <Button Content="&#xE712;"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            FontSize="16"
+                                            Background="Transparent"
+                                            Foreground="#4F646F"
+                                            BorderThickness="0"
+                                            HorizontalAlignment="Right"
+                                            Padding="10,0,5,0"
+                                            Margin="0,0,10,0"
+                                            Grid.Column="4"
+                                            Click="Button_Click"
+                                            FocusVisualStyle="{x:Null}"
+                                            Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                        <Button.ContextMenu>
+                                            <ContextMenu x:Name="OptionsMenu" Background="#FFFFFF" BorderBrush="#4F646F" BorderThickness="1" Margin="0">
+                                                <ContextMenu.ItemContainerStyle>
+                                                    <Style TargetType="MenuItem">
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="Gray"/>
+                                                                <Setter Property="Foreground" Value="#4F646F"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                        <Setter Property="Padding" Value="10,5"/>
+                                                        <Setter Property="FontSize" Value="12"/>
+                                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                                    </Style>
+                                                </ContextMenu.ItemContainerStyle>
+
+                                                <MenuItem Header="View Details"  
+                                                          Command="{Binding Path=PlacementTarget.Tag.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                                          CommandParameter="{Binding Employee_user}"/>
+                                                <MenuItem Header="Edit" 
+                                                          Command="{Binding Path=PlacementTarget.Tag.EditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                                          CommandParameter="{Binding Employee_user}"/>
+                                                <MenuItem Header="Delete" 
+                                                          Command="{Binding Path=PlacementTarget.Tag.DeleteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                                          CommandParameter="{Binding}"/>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button x:Name="AddEmployeeButton"
+                        Content="Add employee"
+                        Command="{Binding AddEmployeeCommand}"
+                        CommandParameter="{Binding CurrentDepartment}"
+                        Width="150" Height="40"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Background="#4CAF50"
+                        BorderThickness="0"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Cursor="Hand">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#4CAF50"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Padding" Value="10,5"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <!-- Efect Hover -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#45A049"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <!-- Efect Clic -->
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="#3E8E41"/>
+                                </Trigger>
+                                <!-- Dezactivat -->
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="#CCCCCC"/>
+                                    <Setter Property="Foreground" Value="#888888"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
             </StackPanel>
         </ScrollViewer>
     </Grid>

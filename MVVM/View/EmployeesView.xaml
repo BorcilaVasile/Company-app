@@ -3,26 +3,175 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Administrare_firma.MVVM.View"
+             xmlns:local="clr-namespace:Administrare_firma.MVVM.View" 
+             xmlns:viewmodel="clr-namespace:Administrare_firma.MVVM.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:EmployeesViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
              Background="#cccccc">
+
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <Border BorderThickness="0,0,0,1"
+        <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
+            <StackPanel Orientation="Vertical">
+                <Border BorderThickness="0,0,0,1"
                 BorderBrush="#5E5ADB">
-                <TextBlock Text="Employees"
+                    <TextBlock Text="Employees"
                      Foreground="#1E1B39"
                      FontSize="22"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Center"
                      Margin="25"
                      FontFamily="Fonts/Popins"/>
-            </Border>
-            <TextBlock Text="This page allows you to see the employees and details about them"
+                </Border>
+                <TextBlock Text="This page allows you to see the employees and details about them"
                      Foreground="White"
                      Margin="10,5,10,0"/>
-        </StackPanel>
+                <ComboBox x:Name="EmployeeFilterComboBox" 
+          Width="200" 
+          HorizontalAlignment="Left" 
+          Margin="10" 
+          SelectionChanged="EmployeeFilterComboBox_SelectionChanged">
+                    <ComboBoxItem Content="All Employees"/>
+                    <ComboBoxItem Content="Managers"/>
+                    <ComboBoxItem Content="Non-Managers"/>
+                </ComboBox>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Name" 
+                FontWeight="SemiBold" 
+                FontSize="16" 
+                Foreground="White" 
+                Margin="5,0,0,0"
+                Grid.Column="0"
+                HorizontalAlignment="Center"/>
+                    <TextBlock Text="Position" 
+                 FontWeight="SemiBold" 
+                 FontSize="16" 
+                 Foreground="White" 
+                 Margin="5,0,0,0"
+                 HorizontalAlignment="Center"
+                 Grid.Column="1"/>
+                    <TextBlock Text="Email" 
+                FontWeight="SemiBold" 
+                FontSize="16" 
+                Foreground="White" 
+                Margin="5,0,0,0"
+                HorizontalAlignment="Center"
+                Grid.Column="2"/>
+                    <TextBlock Text="Phone number" 
+                FontWeight="SemiBold" 
+                FontSize="16" 
+                Foreground="White" 
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left"
+                Grid.Column="3"/>
+                </Grid>
+                <ItemsControl ItemsSource="{Binding Employees_info}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding IsManager, Converter={StaticResource BoolToForegroundColorConverter},ConverterParameter=Manager}" 
+                    CornerRadius="10" 
+                    Margin="10,0,10,5" 
+                    Padding="10" 
+                    BorderBrush="#CCCCCC" 
+                    BorderThickness="1">
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="250"/>
+                                        <ColumnDefinition Width="150"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" 
+                                Grid.Column="0"
+                                HorizontalAlignment="Left">
+                                        <TextBlock Text="{Binding Employee_user.Last_name}" 
+                               Margin="5,0,0,0"  
+                               FontSize="14" 
+                               FontWeight="Normal" 
+                               Foreground="#333333"/>
+                                        <TextBlock Text="{Binding Employee_user.First_name}" 
+                               Margin="5,0,0,0"  
+                               FontSize="14" 
+                               FontWeight="Normal" 
+                               Foreground="#333333"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Employee_user.Post.Nume}"  
+                               Margin="5,0,0,0" 
+                               FontSize="14" 
+                               FontWeight="Normal" 
+                               Foreground="#333333" 
+                               HorizontalAlignment="Left"
+                               Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Employee_user.Email}"  
+                               Margin="5,0,0,0" 
+                               FontSize="14" 
+                               FontWeight="Normal" 
+                               Foreground="#333333" 
+                               HorizontalAlignment="Left"
+                               Grid.Column="2"/>
+                                    <TextBlock Text="{Binding Employee_user.Phone_number}" 
+                               Margin="5,0,0,0"  
+                               FontSize="14" 
+                               FontWeight="Normal" 
+                               Foreground="#333333" 
+                               HorizontalAlignment="Left"
+                               Grid.Column="3"/>
+                                    <Button Content="&#xE712;"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="16"
+                            Background="Transparent"
+                            Foreground="#4F646F"
+                            BorderThickness="0"
+                            HorizontalAlignment="Right"
+                            Padding="10,0,5,0"
+                            Margin="0,0,10,0"
+                            Grid.Column="4"
+                            Click="Button_Click"
+                            FocusVisualStyle="{x:Null}"
+                            Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                        <Button.ContextMenu>
+                                            <ContextMenu x:Name="OptionsMenu" Background="#FFFFFF" BorderBrush="#4F646F" BorderThickness="1" Margin="0">
+                                                <ContextMenu.ItemContainerStyle>
+                                                    <Style TargetType="MenuItem">
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="Gray"/>
+                                                                <Setter Property="Foreground" Value="#4F646F"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                        <Setter Property="Padding" Value="10,5"/>
+                                                        <Setter Property="FontSize" Value="12"/>
+                                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                                    </Style>
+                                                </ContextMenu.ItemContainerStyle>
+
+                                                <MenuItem Header="View Details"  
+                                          Command="{Binding Path=PlacementTarget.Tag.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                          CommandParameter="{Binding Employee_user}"/>
+                                                <MenuItem Header="Edit" 
+                                          Command="{Binding Path=PlacementTarget.Tag.EditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                          CommandParameter="{Binding Employee_user}"/>
+                                                <MenuItem Header="Delete" 
+                                          Command="{Binding Path=PlacementTarget.Tag.DeleteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
+                                          CommandParameter="{Binding Employee_user}"/>
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

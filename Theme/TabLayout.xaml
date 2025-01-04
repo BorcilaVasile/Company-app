@@ -6,6 +6,11 @@
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="VerticalScrollBarVisibility"  Value="Auto"/>
         <Setter Property="Background" Value="#a6c8f0"/>
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        
+
     </Style>
 
 

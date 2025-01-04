@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using Administrare_firma.Core;
 
@@ -12,6 +13,8 @@ namespace Administrare_firma.MVVM.ViewModel
         public ICommand LoginViewCommand { get; private set; }
         public ICommand MainViewCommand { get; private set; }
         public ICommand SignUpViewCommand { get; private set; }
+        public ICommand MinimizeCommand { get; private set; }
+        public ICommand CloseCommand { get; private set; }
 
 
         private object _currentView;
@@ -30,11 +33,13 @@ namespace Administrare_firma.MVVM.ViewModel
         {
             if (_instance == null) 
                 _instance = this;
-            CurrentView = new LoginViewModel();
+            CurrentView = new MainViewModel();
 
             LoginViewCommand = new RelayCommand(o => NavigateToLoginView());
             MainViewCommand = new RelayCommand(o => NavigateToMainView());
             SignUpViewCommand = new RelayCommand(o => NavigateToSignUpView());
+            MinimizeCommand = new RelayCommand(o => Application.Current.MainWindow.WindowState = WindowState.Minimized);
+            CloseCommand = new RelayCommand(o => Application.Current.Shutdown());
         }
 
         // Public static method to get the singleton instance
