@@ -74,6 +74,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\CreateRequestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\EmployeeDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,12 +104,17 @@
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\Service.cs" />
     <Compile Include="MVVM\ViewModel\AddEmployeeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\CreateRequestViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeDetailsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeeEditViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ProjectsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\RequestDetailsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\SignUpViewModel.cs" />
     <Compile Include="MVVM\View\AddEmployeeView.xaml.cs">
       <DependentUpon>AddEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\CreateRequestView.xaml.cs">
+      <DependentUpon>CreateRequestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\EmployeeDetailsView.xaml.cs">
       <DependentUpon>EmployeeDetailsView.xaml</DependentUpon>
@@ -139,7 +148,7 @@
     <Page Include="MVVM\View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\ManagersView.xaml">
+    <Page Include="MVVM\View\ProjectsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,7 +198,6 @@
     <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainPageViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\ManagersViewModel.cs" />
     <Compile Include="MVVM\View\DepartmentDetailsView.xaml.cs">
       <DependentUpon>DepartmentDetailsView.xaml</DependentUpon>
     </Compile>
@@ -208,8 +216,8 @@
     <Compile Include="MVVM\View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\ManagersView.xaml.cs">
-      <DependentUpon>ManagersView.xaml</DependentUpon>
+    <Compile Include="MVVM\View\ProjectsView.xaml.cs">
+      <DependentUpon>ProjectsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\RequestDetailsView.xaml.cs">
       <DependentUpon>RequestDetailsView.xaml</DependentUpon>

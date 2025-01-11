@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Data.Linq;
 using System.Windows;
+using Administrare_firma.MVVM.Model;
+using Administrare_firma.MVVM.ViewModel;
 
 namespace Administrare_firma.Core
 {
@@ -86,13 +88,49 @@ namespace Administrare_firma.Core
         }
         public static void DeleteEmployee(Employee employee)
         {
-            using (var db = new CompanyDataContext())
+            using (var context = new CompanyDataContext())
             {
-                var employeeToDelete = db.Employees.SingleOrDefault(e => e.CNP == employee.CNP);
+                var employeeToDelete = context.Employees.SingleOrDefault(e => e.CNP == employee.CNP);
                 if (employeeToDelete != null)
                 {
-                    db.Employees.DeleteOnSubmit(employeeToDelete);
-                    db.SubmitChanges();
+                    context.Employees.DeleteOnSubmit(employeeToDelete);
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        public void AcceptRequest(Request request)
+        {
+            if (request != null)
+            {
+                using (var context = new CompanyDataContext())
+                {
+                    var requestToAccept = context.Requests.FirstOrDefault(r => r.RequestID == request.RequestID);
+                    if (requestToAccept != null)
+                    {
+                        requestToAccept.Status = "Approved";
+                        context.SubmitChanges();
+                    }
+                    else
+                        Console.WriteLine("The request doesn't exist");
+                }
+            }
+        }
+
+        public void RejectRequest(Request request)
+        {
+            if (request != null)
+            {
+                using (var context = new CompanyDataContext())
+                {
+                    var requestToAccept = context.Requests.FirstOrDefault(r => r.RequestID == request.RequestID);
+                    if (requestToAccept != null)
+                    {
+                        requestToAccept.Status = "Rejected";
+                        context.SubmitChanges();
+                    }
+                    else
+                        Console.WriteLine("The request doesn't exist");
                 }
             }
         }

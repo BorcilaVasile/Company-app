@@ -13,67 +13,93 @@
 
     <Grid>
         <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
-            <StackPanel Orientation="Vertical">
-                <Border Style="{StaticResource BorderLayout}">
-                    <StackPanel>
-                        <Button Content="Go back" 
-                                Style="{StaticResource ButtonGoBack}" 
-                                Command="{Binding NavigateBackCommand}"
-                                CommandParameter="{Binding CurrentDepartment}"/>
-                        <TextBlock Text="Employee Informations" Margin="13" Style="{StaticResource TextBlockLayout}"/>
-                    </StackPanel>
-                </Border>
-                <Border Background="White" CornerRadius="10" Padding="20" BorderBrush="#DDDDDD" BorderThickness="1" Margin="0,0,0,20">
+            <TabControl>
+                <!-- Tab pentru Detalii Angajat -->
+                <TabItem Header="Employee Details">
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="First Name:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.First_name}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Last Name:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Last_name}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Email:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Email}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Phone Number:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Phone_number}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="CNP:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.CNP}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Date of Birth:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Date_of_birth, StringFormat={}{0:dd MMM yyyy}}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Home Address:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Home_address}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Department:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentDepartment.Department.Nume}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Post:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Post}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Base Salary:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Base_salary}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Contract Type:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Contract_type}" />
-                        </StackPanel>
+                        <Border Style="{StaticResource BorderLayout}">
+                            <StackPanel>
+                                <Button Content="Go back" 
+                                        Style="{StaticResource ButtonGoBack}" 
+                                        Command="{Binding NavigateBackCommand}"
+                                        CommandParameter="{Binding CurrentDepartment}"/>
+                                <TextBlock Text="Employee Informations" Margin="13" Style="{StaticResource TextBlockLayout}"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Background="White" CornerRadius="10" Padding="20" BorderBrush="#DDDDDD" BorderThickness="1" Margin="0,0,0,20">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="First Name:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.First_name}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Last Name:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Last_name}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Email:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Email}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Phone Number:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Phone_number}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="CNP:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.CNP}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Date of Birth:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Date_of_birth, StringFormat={}{0:dd MMM yyyy}}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Home Address:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Home_address}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Department:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentDepartment.Department.Nume}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Post:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Post}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Base Salary:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Base_salary}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Contract Type:" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding CurrentEmployee.Contract_type}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                        <Button Content="Edit Employee"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding EditCommand}"
+                                CommandParameter="{Binding CurrentEmployee}" 
+                                Margin="0,20,0,0"
+                                Background="CadetBlue"/>        
                     </StackPanel>
-                </Border>
-            </StackPanel>
+                </TabItem>
+
+                <!-- Tab pentru Prezență -->
+                <TabItem Header="Attendance">
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <TextBlock Text="Attendance Records" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+                        <!-- DataGrid pentru prezență -->
+                        <DataGrid ItemsSource="{Binding Attendance}" AutoGenerateColumns="False" Margin="0,0,0,10" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                            <!-- Definirea coloanelor -->
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Clocking ID" Binding="{Binding ID_clocking}" Width="Auto" />
+                                <DataGridTextColumn Header="Date of Clocking" Binding="{Binding Date_of_clocking, StringFormat={}{0:dd/MM/yyyy}}" Width="auto" />
+                                <DataGridTextColumn Header="Start Hour" Binding="{Binding Start_hour, StringFormat={}{0:hh\\:mm}}" Width="auto" />
+                                <DataGridTextColumn Header="End Hour" Binding="{Binding End_hour, StringFormat={}{0:hh\\:mm}}" Width="auto" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
         </ScrollViewer>
     </Grid>
 </UserControl>
-
-

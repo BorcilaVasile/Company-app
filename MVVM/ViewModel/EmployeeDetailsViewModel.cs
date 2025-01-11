@@ -2,7 +2,9 @@
 using Administrare_firma.MVVM.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,18 @@ namespace Administrare_firma.MVVM.ViewModel
     {
         public DepartmentWithManager _currentDepartment { get; set; }
         public RelayCommand NavigateBackCommand { get; set; }
+        public RelayCommand EditCommand { get; set; }
         public Employee _currentEmployee { get; set; }
+        private ObservableCollection<Clocking> _attendance;
+        public ObservableCollection<Clocking> Attendance
+        {
+            get => _attendance;
+            set
+            {
+                _attendance = value;
+                OnPropertyChanged(nameof(Attendance));
+            }
+        }
 
         private object _currentView;
         private readonly MainViewModel _mainViewModel;
@@ -50,46 +63,60 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public string NavigationSource { get; set; }
 
+        
 
-        public EmployeeDetailsViewModel(DepartmentWithManager departmentWithManager, MainViewModel mainViewModel, Employee employee)
+
+        public EmployeeDetailsViewModel(DepartmentWithManager departmentWithManager, MainViewModel mainViewModel, Employee employee, string navigationSource)
         {
             _currentDepartment = departmentWithManager;
             _mainViewModel = mainViewModel;
             _currentEmployee = employee;
-            NavigationSource = "Department";
-            NavigateBackCommand = new RelayCommand(o => NavigateBack(o));
+            NavigationSource = navigationSource;
+            NavigateBackCommand = new RelayCommand(o => NavigateBack());
+            EditCommand = new RelayCommand(o => NavigateToEditView());
+            LoadAttendance();
         }
 
-        public EmployeeDetailsViewModel(Employee employee, MainViewModel mainViewModel)
+        public EmployeeDetailsViewModel(Employee employee, MainViewModel mainViewModel, string navigationSource)
         {
             _currentEmployee = employee;
             _mainViewModel = mainViewModel;
-            NavigationSource = "EmployeeList";
-            NavigateBackCommand = new RelayCommand(o => NavigateBack(o));
+            NavigationSource = navigationSource;
+            NavigateBackCommand = new RelayCommand(o => NavigateBack());
+            EditCommand = new RelayCommand(o => NavigateToEditView());
+            LoadAttendance();
         }
 
-        public void NavigateBack(object parameter)
+        public void NavigateBack()
         {
             if (NavigationSource == "Department")
             {
-                NavigateToDepartmentDetailsView(parameter);
+                _mainViewModel.NavigateToDepartmentDetailsView(CurrentDepartment);
             }
             else if (NavigationSource == "EmployeeList")
             {
-                NavigateToEmployeesView();
+                _mainViewModel.NavigateToEmployeesView();
             }
+            else if (NavigationSource == "Home")
+                _mainViewModel.NavigateToHomeView(CurrentEmployee.ID, _mainViewModel.IsAdmin, _mainViewModel.IsManager);
         }
-        public void NavigateToDepartmentDetailsView(object parameter)
+        
+        public void NavigateToEditView()
         {
-            var departmentWithManager = parameter as DepartmentWithManager;
-            if (departmentWithManager != null)
+            _mainViewModel.NavigateToEmployeeEditView(CurrentDepartment, _currentEmployee, NavigationSource);
+        }
+        public void LoadAttendance()
+        {
+            using (var context = new CompanyDataContext())
             {
-                _mainViewModel.NavigateToDepartmentDetailsView(departmentWithManager);
+                var attendanceRecords = from clocking in context.Clockings
+                                        where clocking.ID_employee == CurrentEmployee.ID
+                                        orderby clocking.Date_of_clocking descending
+                                        select clocking;
+
+                Attendance = new ObservableCollection<Clocking>(attendanceRecords);
             }
         }
-        public void NavigateToEmployeesView()
-        {
-            _mainViewModel.NavigateToEmployeesView();
-        }
+
     }
 }

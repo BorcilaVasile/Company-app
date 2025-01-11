@@ -25,10 +25,9 @@ namespace Administrare_firma.MVVM.ViewModel
         public ICommand DepartmentDetailsCommand { get; }
 
         private MainViewModel _mainViewModel;
-
         public DepartmentsViewModel(MainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel;
+            this._mainViewModel = mainViewModel;
 
             DepartmentsWithManagers = new ObservableCollection<DepartmentWithManager>();
             LoadDepartmentsWithManagers();

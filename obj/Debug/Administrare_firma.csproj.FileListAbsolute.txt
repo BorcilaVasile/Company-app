@@ -12,7 +12,6 @@ C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\HomeView.g.cs
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\LoginView.g.cs
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\MainView.g.cs
-C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\ManagersView.g.cs
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\SignUpView.g.cs
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\App.g.cs
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
@@ -29,7 +28,6 @@ C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\HomeView.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\LoginView.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\MainView.baml
-C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\ManagersView.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\SignUpView.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\Theme\InputField.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\Administrare_firma.g.resources
@@ -53,3 +51,7 @@ C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\Administ.85FF36FE.Up2Date
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\RequestDetailsView.g.cs
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\RequestDetailsView.baml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\ProjectsView.g.cs
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\ProjectsView.baml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\CreateRequestView.baml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\CreateRequestView.g.cs

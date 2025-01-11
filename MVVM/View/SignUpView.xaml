@@ -150,7 +150,7 @@
                                                     GotFocus="PasswordBox_GotFocus"
                                                     LostFocus="PasswordBox_LostFocus"/>
                                             <TextBlock Style="{StaticResource InputPasswordIcon}"
-                                                   MouseLeftButtonUp="TogglePasswordVisibility"/>
+                                                   MouseLeftButtonDown="TogglePasswordVisibility"/>
                                         </Grid>
                                     </Border>
                                 </StackPanel>
@@ -190,7 +190,7 @@
                                                     GotFocus="PasswordBox_GotFocus"
                                                     LostFocus="PasswordBox_LostFocus"/>
                                             <TextBlock Style="{StaticResource InputPasswordIcon}"
-                                                   MouseLeftButtonUp="ToggleConfirmPasswordVisibility"/>
+                                                   MouseLeftButtonDown="ToggleConfirmPasswordVisibility"/>
                                         </Grid>
                                     </Border>
                                 </StackPanel>

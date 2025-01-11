@@ -1,13 +1,7 @@
 ﻿using Administrare_firma.MVVM.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Administrare_firma.Core;
+using System;
 using System.Windows.Input;
-using System.Security.Permissions;
 using System.Windows;
 
 namespace Administrare_firma.MVVM.ViewModel
@@ -33,14 +27,26 @@ namespace Administrare_firma.MVVM.ViewModel
             }
         }
 
-        public DepartmentDetailsViewModel(DepartmentWithManager departmentWithManager, MainViewModel mainViewModel)
+        private bool _isAdmin;
+        public bool IsAdmin
+        {
+            get => _isAdmin;
+            set
+            {
+                _isAdmin = value;
+                OnPropertyChanged(nameof(IsAdmin));
+            }
+        }
+
+
+        public DepartmentDetailsViewModel(DepartmentWithManager departmentWithManager, MainViewModel mainViewModel, bool isAdmin)
         {
             _currentDepartment = departmentWithManager;
             _mainViewModel = mainViewModel;
+            IsAdmin = isAdmin;
             DepartmentsViewCommand = new RelayCommand(o => NavigateToDepartmentsView());
             AddEmployeeCommand = new RelayCommand(o => NavigateToAddEmployeeView(o));
             ViewDetailsCommand = new RelayCommand(o => ViewDetails(o));
-            EditCommand = new RelayCommand(o => Edit(o));
             DeleteCommand = new RelayCommand(o => Delete(o));
         }
 
@@ -53,20 +59,7 @@ namespace Administrare_firma.MVVM.ViewModel
         {
             if (parameter is Employee selectedEmployee)
             {
-                var currentDepartment = _currentDepartment;
-                _mainViewModel.NavigateToEmployeeDetailsView(currentDepartment, selectedEmployee);
-            }
-            else
-            {
-                Console.WriteLine("Invalid parameter for ViewDetailsCommand");
-            }
-        }
-        private void Edit(object parameter)
-        {
-            if (parameter is Employee selectedEmployee)
-            {
-                var currentDepartment = _currentDepartment;
-                _mainViewModel.NavigateToEmployeeEditView(currentDepartment, selectedEmployee);
+                _mainViewModel.NavigateToEmployeeDetailsView(_currentDepartment, selectedEmployee,"Department");
             }
             else
             {

@@ -42,9 +42,6 @@ namespace Administrare_firma
     partial void InsertBussinessTrip(BussinessTrip instance);
     partial void UpdateBussinessTrip(BussinessTrip instance);
     partial void DeleteBussinessTrip(BussinessTrip instance);
-    partial void InsertClocking(Clocking instance);
-    partial void UpdateClocking(Clocking instance);
-    partial void DeleteClocking(Clocking instance);
     partial void InsertDays_Off(Days_Off instance);
     partial void UpdateDays_Off(Days_Off instance);
     partial void DeleteDays_Off(Days_Off instance);
@@ -81,6 +78,9 @@ namespace Administrare_firma
     partial void InsertProject(Project instance);
     partial void UpdateProject(Project instance);
     partial void DeleteProject(Project instance);
+    partial void InsertClocking(Clocking instance);
+    partial void UpdateClocking(Clocking instance);
+    partial void DeleteClocking(Clocking instance);
     #endregion
 		
 		public CompanyDataContext() : 
@@ -142,14 +142,6 @@ namespace Administrare_firma
 			get
 			{
 				return this.GetTable<BussinessTrip>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Clocking> Clockings
-		{
-			get
-			{
-				return this.GetTable<Clocking>();
 			}
 		}
 		
@@ -246,6 +238,14 @@ namespace Administrare_firma
 			get
 			{
 				return this.GetTable<Project>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Clocking> Clockings
+		{
+			get
+			{
+				return this.GetTable<Clocking>();
 			}
 		}
 	}
@@ -1118,205 +1118,6 @@ namespace Administrare_firma
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Clocking")]
-	public partial class Clocking : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_clocking;
-		
-		private System.Nullable<int> _ID_employee;
-		
-		private System.Nullable<System.DateTime> _Date_of_clocking;
-		
-		private System.Nullable<System.TimeSpan> _Start_hour;
-		
-		private System.Nullable<System.TimeSpan> _End_hour;
-		
-		private EntityRef<Employee> _Employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_clockingChanging(int value);
-    partial void OnID_clockingChanged();
-    partial void OnID_employeeChanging(System.Nullable<int> value);
-    partial void OnID_employeeChanged();
-    partial void OnDate_of_clockingChanging(System.Nullable<System.DateTime> value);
-    partial void OnDate_of_clockingChanged();
-    partial void OnStart_hourChanging(System.Nullable<System.TimeSpan> value);
-    partial void OnStart_hourChanged();
-    partial void OnEnd_hourChanging(System.Nullable<System.TimeSpan> value);
-    partial void OnEnd_hourChanged();
-    #endregion
-		
-		public Clocking()
-		{
-			this._Employee = default(EntityRef<Employee>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_clocking", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID_clocking
-		{
-			get
-			{
-				return this._ID_clocking;
-			}
-			set
-			{
-				if ((this._ID_clocking != value))
-				{
-					this.OnID_clockingChanging(value);
-					this.SendPropertyChanging();
-					this._ID_clocking = value;
-					this.SendPropertyChanged("ID_clocking");
-					this.OnID_clockingChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_employee", DbType="Int")]
-		public System.Nullable<int> ID_employee
-		{
-			get
-			{
-				return this._ID_employee;
-			}
-			set
-			{
-				if ((this._ID_employee != value))
-				{
-					if (this._Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_employeeChanging(value);
-					this.SendPropertyChanging();
-					this._ID_employee = value;
-					this.SendPropertyChanged("ID_employee");
-					this.OnID_employeeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date_of_clocking", DbType="Date")]
-		public System.Nullable<System.DateTime> Date_of_clocking
-		{
-			get
-			{
-				return this._Date_of_clocking;
-			}
-			set
-			{
-				if ((this._Date_of_clocking != value))
-				{
-					this.OnDate_of_clockingChanging(value);
-					this.SendPropertyChanging();
-					this._Date_of_clocking = value;
-					this.SendPropertyChanged("Date_of_clocking");
-					this.OnDate_of_clockingChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Start_hour", DbType="Time")]
-		public System.Nullable<System.TimeSpan> Start_hour
-		{
-			get
-			{
-				return this._Start_hour;
-			}
-			set
-			{
-				if ((this._Start_hour != value))
-				{
-					this.OnStart_hourChanging(value);
-					this.SendPropertyChanging();
-					this._Start_hour = value;
-					this.SendPropertyChanged("Start_hour");
-					this.OnStart_hourChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_End_hour", DbType="Time")]
-		public System.Nullable<System.TimeSpan> End_hour
-		{
-			get
-			{
-				return this._End_hour;
-			}
-			set
-			{
-				if ((this._End_hour != value))
-				{
-					this.OnEnd_hourChanging(value);
-					this.SendPropertyChanging();
-					this._End_hour = value;
-					this.SendPropertyChanged("End_hour");
-					this.OnEnd_hourChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Clocking", Storage="_Employee", ThisKey="ID_employee", OtherKey="ID", IsForeignKey=true)]
-		public Employee Employee
-		{
-			get
-			{
-				return this._Employee.Entity;
-			}
-			set
-			{
-				Employee previousValue = this._Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Employee.Entity = null;
-						previousValue.Clockings.Remove(this);
-					}
-					this._Employee.Entity = value;
-					if ((value != null))
-					{
-						value.Clockings.Add(this);
-						this._ID_employee = value.ID;
-					}
-					else
-					{
-						this._ID_employee = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Employee");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Days_Off")]
 	public partial class Days_Off : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1720,8 +1521,6 @@ namespace Administrare_firma
 		
 		private EntitySet<BussinessTrip> _BussinessTrips;
 		
-		private EntitySet<Clocking> _Clockings;
-		
 		private EntitySet<Days_Off> _Days_Offs;
 		
 		private EntitySet<Evaluation> _Evaluations;
@@ -1735,6 +1534,8 @@ namespace Administrare_firma
 		private EntitySet<Account> _Accounts;
 		
 		private EntitySet<Request> _Requests;
+		
+		private EntitySet<Clocking> _Clockings;
 		
 		private EntityRef<Department> _Department;
 		
@@ -1780,7 +1581,6 @@ namespace Administrare_firma
 			this._Absences = new EntitySet<Absence>(new Action<Absence>(this.attach_Absences), new Action<Absence>(this.detach_Absences));
 			this._Bonus = new EntitySet<Bonus>(new Action<Bonus>(this.attach_Bonus), new Action<Bonus>(this.detach_Bonus));
 			this._BussinessTrips = new EntitySet<BussinessTrip>(new Action<BussinessTrip>(this.attach_BussinessTrips), new Action<BussinessTrip>(this.detach_BussinessTrips));
-			this._Clockings = new EntitySet<Clocking>(new Action<Clocking>(this.attach_Clockings), new Action<Clocking>(this.detach_Clockings));
 			this._Days_Offs = new EntitySet<Days_Off>(new Action<Days_Off>(this.attach_Days_Offs), new Action<Days_Off>(this.detach_Days_Offs));
 			this._Evaluations = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations), new Action<Evaluation>(this.detach_Evaluations));
 			this._Evaluations1 = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations1), new Action<Evaluation>(this.detach_Evaluations1));
@@ -1788,6 +1588,7 @@ namespace Administrare_firma
 			this._User_employees = new EntitySet<User_employee>(new Action<User_employee>(this.attach_User_employees), new Action<User_employee>(this.detach_User_employees));
 			this._Accounts = new EntitySet<Account>(new Action<Account>(this.attach_Accounts), new Action<Account>(this.detach_Accounts));
 			this._Requests = new EntitySet<Request>(new Action<Request>(this.attach_Requests), new Action<Request>(this.detach_Requests));
+			this._Clockings = new EntitySet<Clocking>(new Action<Clocking>(this.attach_Clockings), new Action<Clocking>(this.detach_Clockings));
 			this._Department = default(EntityRef<Department>);
 			this._Post = default(EntityRef<Post>);
 			OnCreated();
@@ -2133,19 +1934,6 @@ namespace Administrare_firma
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Clocking", Storage="_Clockings", ThisKey="ID", OtherKey="ID_employee")]
-		public EntitySet<Clocking> Clockings
-		{
-			get
-			{
-				return this._Clockings;
-			}
-			set
-			{
-				this._Clockings.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Days_Off", Storage="_Days_Offs", ThisKey="ID", OtherKey="ID_employee")]
 		public EntitySet<Days_Off> Days_Offs
 		{
@@ -2234,6 +2022,19 @@ namespace Administrare_firma
 			set
 			{
 				this._Requests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Clocking", Storage="_Clockings", ThisKey="ID", OtherKey="ID_employee")]
+		public EntitySet<Clocking> Clockings
+		{
+			get
+			{
+				return this._Clockings;
+			}
+			set
+			{
+				this._Clockings.Assign(value);
 			}
 		}
 		
@@ -2373,18 +2174,6 @@ namespace Administrare_firma
 			entity.Employee = null;
 		}
 		
-		private void attach_Clockings(Clocking entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = this;
-		}
-		
-		private void detach_Clockings(Clocking entity)
-		{
-			this.SendPropertyChanging();
-			entity.Employee = null;
-		}
-		
 		private void attach_Days_Offs(Days_Off entity)
 		{
 			this.SendPropertyChanging();
@@ -2464,6 +2253,18 @@ namespace Administrare_firma
 		}
 		
 		private void detach_Requests(Request entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = null;
+		}
+		
+		private void attach_Clockings(Clocking entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = this;
+		}
+		
+		private void detach_Clockings(Clocking entity)
 		{
 			this.SendPropertyChanging();
 			entity.Employee = null;
@@ -4634,6 +4435,229 @@ namespace Administrare_firma
 		{
 			this.SendPropertyChanging();
 			entity.Project = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Clocking")]
+	public partial class Clocking : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_clocking;
+		
+		private System.Nullable<int> _ID_employee;
+		
+		private System.Nullable<System.DateTime> _Date_of_clocking;
+		
+		private System.Nullable<System.TimeSpan> _Start_hour;
+		
+		private System.Nullable<System.TimeSpan> _End_hour;
+		
+		private System.Nullable<decimal> _BreakHours;
+		
+		private EntityRef<Employee> _Employee;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_clockingChanging(int value);
+    partial void OnID_clockingChanged();
+    partial void OnID_employeeChanging(System.Nullable<int> value);
+    partial void OnID_employeeChanged();
+    partial void OnDate_of_clockingChanging(System.Nullable<System.DateTime> value);
+    partial void OnDate_of_clockingChanged();
+    partial void OnStart_hourChanging(System.Nullable<System.TimeSpan> value);
+    partial void OnStart_hourChanged();
+    partial void OnEnd_hourChanging(System.Nullable<System.TimeSpan> value);
+    partial void OnEnd_hourChanged();
+    partial void OnBreakHoursChanging(System.Nullable<decimal> value);
+    partial void OnBreakHoursChanged();
+    #endregion
+		
+		public Clocking()
+		{
+			this._Employee = default(EntityRef<Employee>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_clocking", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID_clocking
+		{
+			get
+			{
+				return this._ID_clocking;
+			}
+			set
+			{
+				if ((this._ID_clocking != value))
+				{
+					this.OnID_clockingChanging(value);
+					this.SendPropertyChanging();
+					this._ID_clocking = value;
+					this.SendPropertyChanged("ID_clocking");
+					this.OnID_clockingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_employee", DbType="Int")]
+		public System.Nullable<int> ID_employee
+		{
+			get
+			{
+				return this._ID_employee;
+			}
+			set
+			{
+				if ((this._ID_employee != value))
+				{
+					if (this._Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_employeeChanging(value);
+					this.SendPropertyChanging();
+					this._ID_employee = value;
+					this.SendPropertyChanged("ID_employee");
+					this.OnID_employeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date_of_clocking", DbType="Date")]
+		public System.Nullable<System.DateTime> Date_of_clocking
+		{
+			get
+			{
+				return this._Date_of_clocking;
+			}
+			set
+			{
+				if ((this._Date_of_clocking != value))
+				{
+					this.OnDate_of_clockingChanging(value);
+					this.SendPropertyChanging();
+					this._Date_of_clocking = value;
+					this.SendPropertyChanged("Date_of_clocking");
+					this.OnDate_of_clockingChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Start_hour", DbType="Time")]
+		public System.Nullable<System.TimeSpan> Start_hour
+		{
+			get
+			{
+				return this._Start_hour;
+			}
+			set
+			{
+				if ((this._Start_hour != value))
+				{
+					this.OnStart_hourChanging(value);
+					this.SendPropertyChanging();
+					this._Start_hour = value;
+					this.SendPropertyChanged("Start_hour");
+					this.OnStart_hourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_End_hour", DbType="Time")]
+		public System.Nullable<System.TimeSpan> End_hour
+		{
+			get
+			{
+				return this._End_hour;
+			}
+			set
+			{
+				if ((this._End_hour != value))
+				{
+					this.OnEnd_hourChanging(value);
+					this.SendPropertyChanging();
+					this._End_hour = value;
+					this.SendPropertyChanged("End_hour");
+					this.OnEnd_hourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BreakHours", DbType="Decimal(5,2)")]
+		public System.Nullable<decimal> BreakHours
+		{
+			get
+			{
+				return this._BreakHours;
+			}
+			set
+			{
+				if ((this._BreakHours != value))
+				{
+					this.OnBreakHoursChanging(value);
+					this.SendPropertyChanging();
+					this._BreakHours = value;
+					this.SendPropertyChanged("BreakHours");
+					this.OnBreakHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Clocking", Storage="_Employee", ThisKey="ID_employee", OtherKey="ID", IsForeignKey=true)]
+		public Employee Employee
+		{
+			get
+			{
+				return this._Employee.Entity;
+			}
+			set
+			{
+				Employee previousValue = this._Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Employee.Entity = null;
+						previousValue.Clockings.Remove(this);
+					}
+					this._Employee.Entity = value;
+					if ((value != null))
+					{
+						value.Clockings.Add(this);
+						this._ID_employee = value.ID;
+					}
+					else
+					{
+						this._ID_employee = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Employee");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

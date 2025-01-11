@@ -14,18 +14,36 @@ namespace Administrare_firma.Core
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool isFocused)
+            if (value is bool state)
             {
                 if (parameter is string param)
                 {
-                    if (param == "UpText" || param == "WrongCredentials" || param == "Invert")
+                    if (param == "UpText" || param == "WrongCredentials" || param == "Invert" || param=="Admin")
                     {
-                        return isFocused ? Visibility.Visible : Visibility.Hidden;
+                        return state ? Visibility.Visible : Visibility.Collapsed;
                     }
-
+                    else if (param == "CreateRequestButton")
+                    {
+                        return state ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                    else if( param == "Clocking")
+                    {
+                        return state ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                    else if(param == "EmployeesStatistics")
+                    {
+                        return state ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                    else if(param == "Requests")
+                    {
+                        return state ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                    else if(param == "ProjectsButton" || param == "DepartmentButton" || param == "EditInfoButton")
+                    {
+                        return state ? Visibility.Collapsed : Visibility.Visible;
+                    }
                 }
-
-                return isFocused ? Visibility.Hidden : Visibility.Visible;
+                return state ? Visibility.Hidden : Visibility.Visible;
             }
 
             return Visibility.Hidden;
@@ -42,6 +60,7 @@ namespace Administrare_firma.Core
         }
     }
     public class BoolToForegroundColorConverter : IValueConverter
+    
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -58,6 +77,30 @@ namespace Administrare_firma.Core
             }
             return new SolidColorBrush(Colors.Gray);
         }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class ButtonStateToColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool state && parameter is string buttonType)
+            {
+                if (buttonType == "WorkingTime")
+                {
+                    return state ? new SolidColorBrush(Colors.LightCoral) : new SolidColorBrush(Colors.LightGreen);
+                }
+                else if (buttonType == "Break" )
+                {
+                    return state ? new SolidColorBrush(Colors.LightCoral) : new SolidColorBrush(Colors.LightGreen);
+                }
+            }
+
+            return new SolidColorBrush(Colors.LightGray); // Default color
+        }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
@@ -84,5 +127,66 @@ namespace Administrare_firma.Core
             throw new NotImplementedException();
         }
     }
+    public class BoolToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool state)
+            {
+                if (parameter is string param)
+                    if (param == "DepartmentName")
+                        return state ? "Departments" : "Department details";
+                    else if (param == "WorkingTime")
+                        return state ? "Quit work" : "Start work";
+                    else if (param == "BreakTime")
+                        return state ? "Quit the brake" : "Take a break";
+            }
+            return "Unknown";
+        }
 
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class HoursToMinutesConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is decimal hours)
+            {
+                TimeSpan timeSpan = TimeSpan.FromHours((double)hours);
+
+                int displayHours = timeSpan.Hours;
+                int displayMinutes = timeSpan.Minutes;
+                int displaySeconds = timeSpan.Seconds;
+                int displayMilliseconds = timeSpan.Milliseconds;
+
+                StringBuilder result = new StringBuilder();
+                if (displayHours > 0)
+                {
+                    result.Append($"{displayHours} h ");
+                }
+                if (displayMinutes > 0 || result.Length > 0) 
+                {
+                    result.Append($"{displayMinutes} min ");
+                }
+                if (displaySeconds > 0 || result.Length > 0) 
+                {
+                    result.Append($"{displaySeconds} sec ");
+                }
+                result.Append($"{displayMilliseconds} ms"); 
+
+                return result.ToString().Trim();
+            }
+            return "0 ms";
+        }
+
+
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException(); // Conversion back is not needed
+        }
+    }
 }

@@ -43,16 +43,6 @@
       <Association Name="Employee_BussinessTrip" Member="Employee" ThisKey="ID_employee" OtherKey="ID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Clocking" Member="Clockings">
-    <Type Name="Clocking">
-      <Column Name="ID_clocking" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_employee" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Date_of_clocking" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Start_hour" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="End_hour" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Association Name="Employee_Clocking" Member="Employee" ThisKey="ID_employee" OtherKey="ID" Type="Employee" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Days_Off" Member="Days_Offs">
     <Type Name="Days_Off">
       <Column Name="ID_days_off" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -92,7 +82,6 @@
       <Association Name="Employee_Absence" Member="Absences" ThisKey="ID" OtherKey="ID_employee" Type="Absence" />
       <Association Name="Employee_Bonus" Member="Bonus" ThisKey="ID" OtherKey="ID_employee" Type="Bonus" />
       <Association Name="Employee_BussinessTrip" Member="BussinessTrips" ThisKey="ID" OtherKey="ID_employee" Type="BussinessTrip" />
-      <Association Name="Employee_Clocking" Member="Clockings" ThisKey="ID" OtherKey="ID_employee" Type="Clocking" />
       <Association Name="Employee_Days_Off" Member="Days_Offs" ThisKey="ID" OtherKey="ID_employee" Type="Days_Off" />
       <Association Name="Employee_Evaluation" Member="Evaluations" ThisKey="ID" OtherKey="ID_employee" Type="Evaluation" />
       <Association Name="Employee_Evaluation1" Member="Evaluations1" ThisKey="ID" OtherKey="ID_manager" Type="Evaluation" />
@@ -100,6 +89,7 @@
       <Association Name="Employee_User_employee" Member="User_employees" ThisKey="ID" OtherKey="ID_employee" Type="User_employee" />
       <Association Name="Employee_Account" Member="Accounts" ThisKey="ID" OtherKey="EmployeeID" Type="Account" />
       <Association Name="Employee_Request" Member="Requests" ThisKey="ID" OtherKey="RequesterID" Type="Request" />
+      <Association Name="Employee_Clocking" Member="Clockings" ThisKey="ID" OtherKey="ID_employee" Type="Clocking" />
       <Association Name="Department_Employee" Member="Department" ThisKey="ID_department" OtherKey="ID_department" Type="Department" IsForeignKey="true" />
       <Association Name="Post_Employee" Member="Post" ThisKey="ID_post" OtherKey="ID_post" Type="Post" IsForeignKey="true" />
     </Type>
@@ -207,6 +197,17 @@
       <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="Project_Request" Member="Requests" ThisKey="ProjectID" OtherKey="ProjectID" Type="Request" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Clocking" Member="Clockings">
+    <Type Name="Clocking">
+      <Column Name="ID_clocking" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_employee" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date_of_clocking" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Start_hour" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="End_hour" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="BreakHours" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Association Name="Employee_Clocking" Member="Employee" ThisKey="ID_employee" OtherKey="ID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

@@ -156,9 +156,6 @@
                                                 <MenuItem Header="View Details"  
                                           Command="{Binding Path=PlacementTarget.Tag.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
                                           CommandParameter="{Binding Employee_user}"/>
-                                                <MenuItem Header="Edit" 
-                                          Command="{Binding Path=PlacementTarget.Tag.EditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
-                                          CommandParameter="{Binding Employee_user}"/>
                                                 <MenuItem Header="Delete" 
                                           Command="{Binding Path=PlacementTarget.Tag.DeleteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
                                           CommandParameter="{Binding Employee_user}"/>

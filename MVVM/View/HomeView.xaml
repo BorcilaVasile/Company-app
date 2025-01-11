@@ -3,12 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Administrare_firma.MVVM.View"
-             xmlns:oxy="http://oxyplot.org/wpf" 
+             xmlns:local="clr-namespace:Administrare_firma"
+             xmlns:view="clr-namespace:Administrare_firma.MVVM.View"
              xmlns:viewmodel="clr-namespace:Administrare_firma.MVVM.ViewModel" 
+             xmlns:core="clr-namespace:Administrare_firma.Core"
+             xmlns:oxy="http://oxyplot.org/wpf" 
              d:DataContext="{d:DesignInstance Type=viewmodel:HomeViewModel}"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
              mc:Ignorable="d" >
 
+    <UserControl.Resources>
+        <core:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <core:ButtonStateToColorConverter x:Key="ButtonStateToColorConverter"/>
+        <core:BoolToStringConverter x:Key="BoolToStringConverter"/>
+        <core:HoursToMinutesConverter x:Key="HoursToMinutesConverter"/>
+    </UserControl.Resources>
 
     <ScrollViewer Style="{StaticResource ScrollViewerLayout}" >
         <StackPanel Orientation="Vertical">
@@ -16,7 +26,8 @@
                 <TextBlock Text="Home" Style="{StaticResource TextBlockLayout}"/>
             </Border>
             <StackPanel Orientation="Horizontal"
-                    Margin="10">
+                    Margin="10"
+                    Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EmployeesStatistics}">
                 <StackPanel Orientation="Horizontal">
                     <oxy:PlotView Model="{Binding ActiveInactiveModel}" Height="300" Width="300"/>
                     <oxy:PlotView Model="{Binding EmploymentTypesModel}" Height="300" Width="300"/>
@@ -46,7 +57,39 @@
                 </Border.Background>
             </Border>
 
-            <ListView ItemsSource="{Binding Requests}" Margin="10">
+            <Button Content="Create Request" 
+                    Margin="10" 
+                    Width="150" 
+                    Command="{Binding CreateRequestCommand}"
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=CreateRequestButton}"/>
+
+            <Border Style="{StaticResource BorderLayout}" 
+                    Margin="10"
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}">
+                <StackPanel>
+                    <TextBlock Text="Manual Attendance Registration" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <Button Content="{Binding Working, Converter={StaticResource BoolToStringConverter}, ConverterParameter=WorkingTime}" 
+                                Command="{Binding SetTimeCommand}" 
+                                Margin="10,0,0,0"
+                                FocusVisualStyle="{x:Null}"
+                                Background="{Binding Working, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=WorkingTime}"/>
+
+                        <Button Content="{Binding Pause, Converter={StaticResource BoolToStringConverter}, ConverterParameter=BreakTime}"
+                                Command="{Binding SetBreakTimeCommand}"
+                                Margin="10,0,0,0"
+                                FocusVisualStyle="{x:Null}"
+                                Background="{Binding Pause, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=Break}"
+                                IsEnabled="{Binding Working}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+
+            <ListView ItemsSource="{Binding Requests}" 
+                      Margin="10"
+                      Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Requests }">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Request.RequestID}" Width="auto"/>
@@ -55,7 +98,6 @@
                         <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Request.RequestType}" Width="auto"/>
                         <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Request.Status}" Width="auto"/>
                         <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Request.RequestDate, StringFormat=d}" Width="auto"/>
-                        <!-- Coloană pentru buton -->
                         <GridViewColumn Header="Details">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -70,6 +112,11 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
+                            <DataTrigger Binding="{Binding Important}" Value="True">
+                                <Setter Property="Background" Value="Gold" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </DataTrigger>
+
                             <DataTrigger Binding="{Binding Request.Status}" Value="Approved">
                                 <Setter Property="Background" Value="LightSeaGreen" />
                             </DataTrigger>
@@ -82,71 +129,25 @@
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
+
             </ListView>
-
-
-            <StackPanel>
-
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="Margin" Value="15,0,0,0"/>
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="Statistics"
-                    Foreground="#1E1B39"
-                    FontSize="28"
-                    Margin="20,10,10,0"/>
-
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical">
-                        <Border Width="150"
-                            Height="150"
-                            Background="#844eff"
-                            CornerRadius="100">
-                        </Border>
-                        <TextBlock Text="Human Resources" 
-                               Foreground="#1E1B39"
-                               FontSize="18"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Border Width="150"
-                             Height="150"
-                             Background="#4e99ff"
-                             CornerRadius="100"/>
-                        <TextBlock Text="Sales"
-                           Foreground="#1E1B39"
-                           FontSize="18"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical">
-                        <Border Width="150"
-                        Height="150"
-                        Background="#4eff91"
-                        CornerRadius="100"/>
-                        <TextBlock Text="Marketing"
-                       Foreground="#1E1B39"
-                       FontSize="18"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Border Width="150"
-                         Height="150"
-                         Background="#ecff4e"
-                         CornerRadius="100"/>
-                        <TextBlock Text="Finance"
-                           Foreground="#1E1B39"
-                           FontSize="18"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"/>
-
-                    </StackPanel>
-                </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}">
+                <TextBlock Text="Clocking Data" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                <ListView ItemsSource="{Binding ClockingData}" Margin="10">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID_clocking}" Width="auto"/>
+                            <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding ID_employee}" Width="auto"/>
+                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date_of_clocking, StringFormat=d}" Width="auto"/>
+                            <GridViewColumn Header="Start Hour" DisplayMemberBinding="{Binding Start_hour}" Width="auto"/>
+                            <GridViewColumn Header="End Hour" DisplayMemberBinding="{Binding End_hour}" Width="auto"/>
+                            <GridViewColumn Header="Pause" 
+                                                DisplayMemberBinding="{Binding BreakHours, Converter={StaticResource HoursToMinutesConverter}}"  
+                                                Width="auto"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

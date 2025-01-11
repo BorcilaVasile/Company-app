@@ -4,7 +4,13 @@
             xmlns:viewModel="clr-namespace:Administrare_firma.MVVM.ViewModel"
             xmlns:local="clr-namespace:Administrare_firma"
 			xmlns:view="clr-namespace:Administrare_firma.MVVM.View"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" >
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:core="clr-namespace:Administrare_firma.Core">
+
+    <UserControl.Resources>
+        <core:BoolToStringConverter x:Key="BoolToStringConverter" />
+    </UserControl.Resources>
+
     <Grid Background="Transparent">
         <Border Background="White" CornerRadius="0,15,0,15">
             <Grid>
@@ -38,27 +44,38 @@
                                      Style="{StaticResource MenuButtonTheme}"
                                      IsChecked="True"
                                      Command="{Binding HomeViewCommand}"/>
-                        <RadioButton Content="Departments"
+                        <RadioButton Content="{Binding IsAdmin, Converter={StaticResource BoolToStringConverter}, ConverterParameter=DepartmentName}"
                                       Height="50"
                                       Foreground="white"
                                       FontSize="14"
                                       Style="{StaticResource MenuButtonTheme}"
                                       IsChecked="False"
-                                      Command="{Binding DepartmentsViewCommand}"/>
-                        <RadioButton Content="Managers"
+                                      Command="{Binding DepartmentsViewCommand}"
+                                     Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=DepartmentButton}"/>
+                        <RadioButton Content="Projects"
                                       Height="50"
                                       Foreground="white"
                                       FontSize="14"
                                       Style="{StaticResource MenuButtonTheme}"
                                       IsChecked="False"
-                                      Command="{Binding ManagersViewCommand}"/>
+                                      Command="{Binding ProjectsViewCommand}"
+                                      Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=ProjectsButton}"/>
                         <RadioButton Content="Employees"
                                        Height="50"
                                        Foreground="white"
                                        FontSize="14"
                                        Style="{StaticResource MenuButtonTheme}"
                                        IsChecked="False"
-                                       Command="{Binding EmployeesViewCommand}"/>
+                                       Command="{Binding EmployeesViewCommand}"
+                                       Visibility="{Binding IsAdmin, Converter={ StaticResource BoolToVisibilityConverter}, ConverterParameter=Admin}"/>
+                        <RadioButton Content="Personal information"
+                                        Height="50"
+                                        Foreground="white"
+                                        FontSize="14"
+                                        Style="{StaticResource MenuButtonTheme}"
+                                        IsChecked="False"
+                                        Command="{Binding CurrentEmployeeDetailsViewCommand}"
+                                        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EditInfoButton}"/>
                     </StackPanel>
                     <RadioButton Content="Logout"
                                         Height="50"

@@ -17,15 +17,15 @@
                 <ResourceDictionary Source="Theme/InputField.xaml"/>
                 <ResourceDictionary Source="Theme/Button.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-           
+
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <view:HomeView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:DepartmentsViewModel}">
                 <view:DepartmentsView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:ManagersViewModel}">
-                <view:ManagersView/>
+            <DataTemplate DataType="{x:Type viewModel:ProjectsViewModel}">
+                <view:ProjectsView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:EmployeesViewModel}">
                 <view:EmployeesView/>
@@ -41,6 +41,12 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:AddEmployeeViewModel}">
                 <view:AddEmployeeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RequestDetailsViewModel}">
+                <view:RequestDetailsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:CreateRequestViewModel}">
+                <view:CreateRequestView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
                 <view:LoginView/>

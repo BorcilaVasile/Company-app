@@ -91,19 +91,30 @@ namespace Administrare_firma.MVVM.ViewModel
 
         private void ExecuteLogin()
         {
-            MainPageViewModel.Instance.NavigateToMainView();
-            //using (var context = new CompanyDataContext())
-            //{
-            //    var query = context.Accounts
-            //        .FirstOrDefault(account => account.Email == _email && account.Password == _password);
+            MainPageViewModel.Instance.TypeOfUser = "angajat";
+            using (var context = new CompanyDataContext())
+            {
+                var query = context.Accounts
+                    .FirstOrDefault(account => account.Email == _email && account.Password == _password);
 
-            //    if (query != null)
-            //    {
-            //        MainPageViewModel.Instance.NavigateToMainView();
-            //    }
-            //    else
-            //        InputIsWrong = true;
-            //}
+                if (query != null)
+                {
+                    MainPageViewModel.Instance.employeeId=query.EmployeeID;
+                    if (query.Email == "admin@email.com")
+                        MainPageViewModel.Instance.TypeOfUser = "admin";
+                    else
+                    {
+                        bool IsManager = context.Employees.Any(e => e.ID == query.EmployeeID &&
+                                        context.Posts.Any(p => p.ID_post == e.ID_post && p.Level_of_importance == 3));
+                        if (IsManager)
+                            MainPageViewModel.Instance.TypeOfUser = "manager";
+                    }
+
+                    MainPageViewModel.Instance.NavigateToMainView();
+                }
+                else
+                    InputIsWrong = true;
+            }
         }
 
         private bool CanExecuteLogin(object parameter)

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Administrare_firma.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for ManagersView.xaml
+    /// Interaction logic for ProjectsView.xaml
     /// </summary>
-    public partial class ManagersView : UserControl
+    public partial class ProjectsView : UserControl
     {
-        public ManagersView()
+        public ProjectsView()
         {
             InitializeComponent();
         }

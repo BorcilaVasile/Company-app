@@ -15,7 +15,10 @@
             <StackPanel Orientation="Vertical">
                 <Border Style="{StaticResource BorderLayout}">
                     <StackPanel>
-                        <Button Content="Go back" Style="{StaticResource ButtonGoBack}" Command="{Binding DepartmentsViewCommand}"/>
+                        <Button Content="Go back" 
+                                Style="{StaticResource ButtonGoBack}" 
+                                Command="{Binding DepartmentsViewCommand}"
+                                Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Admin}"/>
                         <TextBlock Text="{Binding CurrentDepartment.Department.Nume}" Margin="13" Style="{StaticResource TextBlockLayout}"/>
                     </StackPanel>
                 </Border>
@@ -138,9 +141,6 @@
 
                                                 <MenuItem Header="View Details"  
                                                           Command="{Binding Path=PlacementTarget.Tag.ViewDetailsCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
-                                                          CommandParameter="{Binding Employee_user}"/>
-                                                <MenuItem Header="Edit" 
-                                                          Command="{Binding Path=PlacementTarget.Tag.EditCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 
                                                           CommandParameter="{Binding Employee_user}"/>
                                                 <MenuItem Header="Delete" 
                                                           Command="{Binding Path=PlacementTarget.Tag.DeleteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" 

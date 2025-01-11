@@ -130,7 +130,7 @@ namespace Administrare_firma.MVVM.ViewModel
         {
             if (parameter is Employee selectedEmployee)
             {
-                _mainViewModel.NavigateToEmployeeDetailsView(selectedEmployee);
+                _mainViewModel.NavigateToEmployeeDetailsView(selectedEmployee, "EmployeeList");
             }
             else
             {
@@ -139,7 +139,14 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         private void Edit(object parameter)
         {
-            
+            if (parameter is Employee selectedEmployee)
+            {
+                _mainViewModel.NavigateToEmployeeEditView(selectedEmployee, "EmployeeList");
+            }
+            else
+            {
+                Console.WriteLine("Invalid parameter for ViewDetailsCommand");
+            }
         }
         private void Delete(object parameter)
         {

@@ -9,6 +9,8 @@ namespace Administrare_firma.MVVM.ViewModel
     {
         public static MainPageViewModel _instance;
         private static readonly object _lock = new object();
+        public string TypeOfUser = "angajat";
+        public int employeeId;
 
         public ICommand LoginViewCommand { get; private set; }
         public ICommand MainViewCommand { get; private set; }
@@ -33,7 +35,7 @@ namespace Administrare_firma.MVVM.ViewModel
         {
             if (_instance == null) 
                 _instance = this;
-            CurrentView = new MainViewModel();
+            CurrentView = new LoginViewModel();
 
             LoginViewCommand = new RelayCommand(o => NavigateToLoginView());
             MainViewCommand = new RelayCommand(o => NavigateToMainView());
@@ -60,7 +62,7 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public void NavigateToMainView()
         {
-            CurrentView = new MainViewModel();
+            CurrentView = new MainViewModel(TypeOfUser,employeeId);
         }
 
         public void NavigateToLoginView()
