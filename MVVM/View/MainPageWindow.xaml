@@ -13,13 +13,22 @@
         VerticalAlignment="Bottom"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="Transparent"
         AllowsTransparency="True"
+        Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.DataContext>
         <viewModel:MainPageViewModel/>
     </Window.DataContext>
-    <Border CornerRadius="15" Background="#81C3D7" BorderBrush="Gray">
+    <Border CornerRadius="15" BorderBrush="Gray">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#3A7CA5" Offset="0"/>
+                <GradientStop Color="#58AFC8" Offset="0.10" />
+                <GradientStop Color="#81C3D7" Offset="0.20" />
+                <GradientStop Color="#7BC9D9" Offset="0.30"/>
+                <GradientStop Color="#F5E4A1" Offset="1" />
+            </LinearGradientBrush>
+        </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

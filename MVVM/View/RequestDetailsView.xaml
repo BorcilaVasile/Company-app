@@ -9,152 +9,274 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
-    <Grid Background="AliceBlue">
-        <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="10">
+    <Grid Background="#F4F7FB">
+        <Border CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Padding="20" Margin="20" Background="White">
             <StackPanel Orientation="Vertical">
+                <!-- Titlul principal -->
                 <TextBlock Text="Request Details" 
-                       FontWeight="Bold" 
-                       FontSize="18" 
-                       Foreground="DarkBlue" 
-                       Margin="0,0,0,10" 
-                       HorizontalAlignment="Center" />
-                <Grid Margin="0,10,0,10">
+                           FontWeight="Bold" 
+                           FontSize="24" 
+                           Foreground="#2E3A59" 
+                           HorizontalAlignment="Center" 
+                           Margin="0,0,0,20" />
+
+                <!-- Secțiunea cu informații despre cerere -->
+                <TextBlock Text="Request Information" 
+                           FontWeight="Bold" 
+                           FontSize="18" 
+                           Foreground="#3A6EA5" 
+                           Margin="0,0,0,10" />
+
+                <Grid Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Request Information -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Request ID:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequestID}" />
+                    <!-- Generare automată rânduri -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Request ID:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequestID}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Request Type:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequestType}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Request Type:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequestType}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Requester ID:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequesterID}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Requester ID:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequesterID}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Request Date:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequestDate, StringFormat=d}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Request Date:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CurrentRequest.Request.RequestDate, StringFormat=d}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Duration (days):" FontWeight="Bold" />
-                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding CurrentRequest.Request.DurationDays}" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Duration (days):" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding CurrentRequest.Request.DurationDays}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Reason:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding CurrentRequest.Request.Reason}" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Reason:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding CurrentRequest.Request.Reason}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Explanation:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding CurrentRequest.Request.Explanation}" />
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Explanation:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding CurrentRequest.Request.Explanation}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="7" Grid.Column="0" Text="Status:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding CurrentRequest.Request.Status}" />
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="Status:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding CurrentRequest.Request.Status}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="8" Grid.Column="0" Text="Reviewed By:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding CurrentRequest.Request.ReviewedBy}" />
+                    <!-- Reviewed By -->
+                    <TextBlock Grid.Row="8" Grid.Column="0" Text="Reviewed By:" FontWeight="SemiBold" Foreground="#2E3A59">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.ReviewedBy}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding CurrentRequest.Request.ReviewedBy}" Foreground="#5A5A5A">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.ReviewedBy}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
 
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="Review Date:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding CurrentRequest.Request.ReviewDate, StringFormat=d}" />
+                    <!-- Review Date -->
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="Review Date:" FontWeight="SemiBold" Foreground="#2E3A59">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.ReviewDate}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding CurrentRequest.Request.ReviewDate, StringFormat=d}" Foreground="#5A5A5A">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.ReviewDate}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
 
-                    <TextBlock Grid.Row="10" Grid.Column="0" Text="Remarks:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding CurrentRequest.Request.Remarks}" />
+                    <!-- Remarks -->
+                    <TextBlock Grid.Row="10" Grid.Column="0" Text="Remarks:" FontWeight="SemiBold" Foreground="#2E3A59">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.Remarks}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding CurrentRequest.Request.Remarks}" Foreground="#5A5A5A">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.Remarks}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
 
-                    <TextBlock Grid.Row="11" Grid.Column="0" Text="Project ID:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding CurrentRequest.Request.ProjectID}" />
+                    <!-- Project ID -->
+                    <TextBlock Grid.Row="11" Grid.Column="0" Text="Project ID:" FontWeight="SemiBold" Foreground="#2E3A59">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.ProjectID}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding CurrentRequest.Request.ProjectID}" Foreground="#5A5A5A">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentRequest.Request.ProjectID}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
                 </Grid>
 
-                <!-- Requester Information -->
+                <!-- Secțiunea cu informații despre solicitant -->
                 <TextBlock Text="Requester Details" 
-                       FontWeight="Bold" 
-                       FontSize="18" 
-                       Foreground="DarkBlue" 
-                       Margin="0,10,0,10" 
-                       HorizontalAlignment="Center" />
-                <Grid Margin="0,10,0,0">
+                           FontWeight="Bold" 
+                           FontSize="18" 
+                           Foreground="#3A6EA5" 
+                           Margin="0,0,0,10" />
+
+                <Grid Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="200" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Last Name:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Last_name}" />
+                    <!-- Detalii despre solicitant -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Last Name:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Last_name}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="First Name:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CurrentRequest.Requester.First_name}" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="First Name:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding CurrentRequest.Requester.First_name}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="CNP:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentRequest.Requester.CNP}" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="CNP:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CurrentRequest.Requester.CNP}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Date of Birth:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Date_of_birth, StringFormat=d}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Date of Birth:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Date_of_birth, StringFormat=d}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Home Address:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Home_address}" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Home Address:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Home_address}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Phone Number:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Phone_number}" />
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Phone Number:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Phone_number}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Email:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Email}" />
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Email:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Email}" Foreground="#5A5A5A" />
 
-                    <TextBlock Grid.Row="7" Grid.Column="0" Text="Department:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding CurrentRequest.Requester.ID_department}" />
-
-                    <TextBlock Grid.Row="8" Grid.Column="0" Text="Post:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding CurrentRequest.Requester.ID_post}" />
-
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="Base Salary:" FontWeight="Bold" />
-                    <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Base_salary, StringFormat=C}" />
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="Base Salary:" FontWeight="SemiBold" Foreground="#2E3A59" />
+                    <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding CurrentRequest.Requester.Base_salary, StringFormat=C}" Foreground="#5A5A5A" />
                 </Grid>
+
+                <!-- Butoane de acțiune -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <!-- Buton Accept -->
                     <Button Content="Accept" 
-                            Command="{Binding AcceptCommand}" 
-                            CommandParameter="{Binding CurrentRequest}"
-                            Width="100" 
-                            Height="40"
-                            Margin="10" 
-                            Background="LightGreen" />
+            Command="{Binding AcceptCommand}" 
+            CommandParameter="{Binding CurrentRequest}" 
+            Width="120" Height="40" 
+            Margin="10"
+            Style="{StaticResource RoundedButtonStyle}">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#4CAF50" Offset="0.0" />
+                                <GradientStop Color="#388E3C" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <!-- Buton Reject -->
                     <Button Content="Reject" 
-                            Command="{Binding RejectCommand}"
-                            CommandParameter="{Binding CurrentRequest}"
-                            Width="100" 
-                            Height="40"
-                            Margin="10" 
-                            Background="Tomato" />
+            Command="{Binding RejectCommand}" 
+            CommandParameter="{Binding CurrentRequest}" 
+            Width="120" Height="40" 
+            Margin="10"
+            Style="{StaticResource RoundedButtonStyle}">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#E53935" Offset="0.0" />
+                                <GradientStop Color="#D32F2F" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
+                    <!-- Buton Cancel -->
                     <Button Content="Cancel" 
-                            Command="{Binding CancelCommand}" 
-                            Width="100" 
-                            Height="40"
-                            Margin="10" 
-                            Background="LightGray" />
+            Command="{Binding CancelCommand}" 
+            Width="120" Height="40" 
+            Margin="10"
+            Style="{StaticResource RoundedButtonStyle}">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#BDBDBD" Offset="0.0" />
+                                <GradientStop Color="#9E9E9E" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </StackPanel>
+
             </StackPanel>
         </Border>
-
     </Grid>
 </UserControl>

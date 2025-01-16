@@ -15,18 +15,9 @@
     </UserControl.Resources>
 
     <Grid>
-        <Border Height="300" VerticalAlignment="Top">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#3A7CA5" Offset="0"/>
-                    <GradientStop Color="#58AFC8" Offset="0.25" />
-                    <GradientStop Color="#81C3D7" Offset="0.5" />
-                    <GradientStop Color="#7BC9D9" Offset="0.75"/>
-                    <GradientStop Color="#F5E4A1" Offset="1" />
-                </LinearGradientBrush>
-            </Border.Background>
+        <Border Height="300" VerticalAlignment="Top" Background="Transparent">
         </Border>
-        <Path Fill="White" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" 
+        <Path Fill="#374650" HorizontalAlignment="Center" VerticalAlignment="Top" Stretch="Fill" 
           Data="M 0,-150 L 930,-200 L 930,200 L 0,200 Z" Margin="0,-10,0,0" Width="920">
             <Path.RenderTransform>
                 <TranslateTransform X="0" Y="200" />

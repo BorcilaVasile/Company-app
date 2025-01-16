@@ -32,28 +32,28 @@
                     <TextBlock Text="Name" 
                                FontWeight="SemiBold" 
                                FontSize="16" 
-                               Foreground="White" 
+                               Foreground="#1E3A5F"  
                                Margin="5,0,0,0"
                                Grid.Column="0"
                                HorizontalAlignment="Center"/>
                     <TextBlock Text="Position" 
                                 FontWeight="SemiBold" 
                                 FontSize="16" 
-                                Foreground="White" 
+                                Foreground="#1E3A5F"  
                                 Margin="5,0,0,0"
                                 HorizontalAlignment="Center"
                                 Grid.Column="1"/>
                     <TextBlock Text="Email" 
                                FontWeight="SemiBold" 
                                FontSize="16" 
-                               Foreground="White" 
+                               Foreground="#1E3A5F"  
                                Margin="5,0,0,0"
                                HorizontalAlignment="Center"
                                Grid.Column="2"/>
                     <TextBlock Text="Phone number" 
                                FontWeight="SemiBold" 
                                FontSize="16" 
-                               Foreground="White" 
+                               Foreground="#1E3A5F"  
                                Margin="5,0,0,0"
                                HorizontalAlignment="Left"
                                Grid.Column="3"/>
@@ -190,16 +190,13 @@
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
-                                <!-- Efect Hover -->
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#45A049"/>
                                     <Setter Property="Foreground" Value="White"/>
                                 </Trigger>
-                                <!-- Efect Clic -->
                                 <Trigger Property="IsPressed" Value="True">
                                     <Setter Property="Background" Value="#3E8E41"/>
                                 </Trigger>
-                                <!-- Dezactivat -->
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Background" Value="#CCCCCC"/>
                                     <Setter Property="Foreground" Value="#888888"/>

@@ -14,11 +14,13 @@
         <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
             <StackPanel Orientation="Vertical">
                 <Border Style="{StaticResource BorderLayout}">
-                    <TextBlock Text="Departments" Style="{StaticResource TextBlockLayout}"/>
+                    <StackPanel>
+                        <TextBlock Text="Departments"
+                   Style="{StaticResource TextBlockLayout}" />
+                        <TextBlock Text="This page allows you to see the deparments and details about them"
+                   Style="{StaticResource SubTitleTextLayout}" />
+                    </StackPanel>
                 </Border>
-                <TextBlock Text="This page allows you to see the deparments and details about them"
-                   Foreground="White"
-                   Margin="10,5,10,0"/>
                 <Border Background="Transparent" CornerRadius="15" Margin="15" >
                     <ItemsControl ItemsSource="{Binding DepartmentsWithManagers}">
                         <ItemsControl.ItemsPanel>

@@ -4,53 +4,72 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Administrare_firma.MVVM.View"
+             xmlns:core="clr-namespace:Administrare_firma.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="#cccccc">
+             Background="#F7F9FC">
+    <UserControl.Resources>
+        <core:NullableTimeConverter x:Key="NullableTimeConverter"/>
+    </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <Border BorderThickness="0,0,0,1"
-        BorderBrush="#5E5ADB">
-                <TextBlock Text="Projects"
-             Foreground="#1E1B39"
-             FontSize="22"
-             HorizontalAlignment="Left"
-             VerticalAlignment="Center"
-             Margin="25"
-             FontFamily="Fonts/Popins"/>
-            </Border>
-            <TextBlock Text="This page allows you to see the projects"
-             Foreground="White"
-             Margin="10,5,10,0"/>
-        <DataGrid ItemsSource="{Binding Projects}" 
-                  AutoGenerateColumns="False" 
-                  CanUserAddRows="False" 
-                  Margin="10"
-                  CanUserDeleteRows="False" 
-                  IsReadOnly="True"
-                  AlternatingRowBackground="LightGray"
-                  HeadersVisibility="Column">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Project ID" 
-                                    Binding="{Binding ProjectID}" 
-                                    Width="65" />
-                <DataGridTextColumn Header="Contractor Company" 
-                                    Binding="{Binding ContractorCompany}" 
-                                    Width="120" />
-                <DataGridTextColumn Header="Duration (months)" 
-                                    Binding="{Binding Duration}" 
-                                    Width="120" />
-                <DataGridTextColumn Header="Expenses" 
-                                    Binding="{Binding Expenses, StringFormat={}{0:C}}" 
-                                    Width="120" />
-                <DataGridTextColumn Header="Start Date" 
-                                    Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" 
-                                    Width="150" />
-                <DataGridTextColumn Header="End Date" 
-                                    Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" 
-                                    Width="140" />
-            </DataGrid.Columns>
-        </DataGrid>
-        </StackPanel>
+        <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
+            <StackPanel Orientation="Vertical">
+                <!-- Header Section -->
+                <Border Style="{StaticResource BorderLayout}">
+                    <StackPanel>
+                        <TextBlock Text="Projects"
+                                   Style="{StaticResource TextBlockLayout}" />
+                        <TextBlock Text="This page allows you to see the projects"
+                                   Style="{StaticResource SubTitleTextLayout}" />
+                    </StackPanel>
+                </Border>
+
+                <!-- ItemsControl for Project Cards -->
+                <ItemsControl ItemsSource="{Binding Projects}" Margin="10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" CornerRadius="10" Padding="15" Margin="10" BorderBrush="#DDDDDD" BorderThickness="1" Width="300">
+                                <StackPanel Orientation="Vertical">
+                                    <!-- Contractor Company -->
+                                    <TextBlock Text="Contractor Company:" FontWeight="Bold" Foreground="#4C86A8" />
+                                    <TextBlock Text="{Binding ContractorCompany}" Margin="0,0,0,10" />
+
+                                    <!-- Duration -->
+                                    <TextBlock Text="Duration (months):" FontWeight="Bold" Foreground="#4C86A8" />
+                                    <TextBlock Text="{Binding Duration}" Margin="0,0,0,10" />
+
+                                    <!-- Expenses -->
+                                    <TextBlock Text="Expenses:" FontWeight="Bold" Foreground="#4C86A8" />
+                                    <TextBlock Text="{Binding Expenses, StringFormat={}{0:C}}" Margin="0,0,0,10" />
+
+                                    <!-- Start Date -->
+                                    <TextBlock Text="Start Date:" FontWeight="Bold" Foreground="#4C86A8" />
+                                    <TextBlock Text="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" Margin="0,0,0,10" />
+
+                                    <!-- End Date -->
+                                    <TextBlock Text="End Date:" FontWeight="Bold" Foreground="#4C86A8" />
+                                    <TextBlock Text="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" Margin="0,0,0,10" />
+
+                                    <!-- Button for More Details -->
+                                    <Button Content="View Details"
+                                            Width="120"
+                                            HorizontalAlignment="Center"
+                                            Margin="10,15,10,0"
+                                            Background="#4C86A8"
+                                            Foreground="White"
+                                            Command="{Binding DataContext.ViewProjectDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

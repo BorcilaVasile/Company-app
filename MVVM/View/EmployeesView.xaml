@@ -14,27 +14,24 @@
     <Grid>
         <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
             <StackPanel Orientation="Vertical">
-                <Border BorderThickness="0,0,0,1"
-                BorderBrush="#5E5ADB">
-                    <TextBlock Text="Employees"
-                     Foreground="#1E1B39"
-                     FontSize="22"
-                     HorizontalAlignment="Left"
-                     VerticalAlignment="Center"
-                     Margin="25"
-                     FontFamily="Fonts/Popins"/>
+                <Border Style="{StaticResource BorderLayout}">
+                    <StackPanel>
+                        <TextBlock Text="Projects"
+                    Style="{StaticResource TextBlockLayout}" />
+                        <TextBlock Text="This page allows you to see the employees and details about them"
+                    Style="{StaticResource SubTitleTextLayout}" />
+                    </StackPanel>
                 </Border>
-                <TextBlock Text="This page allows you to see the employees and details about them"
-                     Foreground="White"
-                     Margin="10,5,10,0"/>
                 <ComboBox x:Name="EmployeeFilterComboBox" 
-          Width="200" 
-          HorizontalAlignment="Left" 
-          Margin="10" 
-          SelectionChanged="EmployeeFilterComboBox_SelectionChanged">
-                    <ComboBoxItem Content="All Employees"/>
-                    <ComboBoxItem Content="Managers"/>
-                    <ComboBoxItem Content="Non-Managers"/>
+                          Width="200" 
+                          Background="Gray"
+                          HorizontalAlignment="Left" 
+                          Margin="10" 
+                          Style="{StaticResource ComboBoxStyle}"
+                          SelectionChanged="EmployeeFilterComboBox_SelectionChanged">
+                    <ComboBoxItem Content="All Employees" Style="{StaticResource ComboxItemStyle}"/>
+                    <ComboBoxItem Content="Managers" Style="{StaticResource ComboxItemStyle}"/>
+                    <ComboBoxItem Content="Non-Managers" Style="{StaticResource ComboxItemStyle}"/>
                 </ComboBox>
 
                 <Grid>
@@ -45,30 +42,30 @@
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Name" 
-                FontWeight="SemiBold" 
-                FontSize="16" 
-                Foreground="White" 
-                Margin="5,0,0,0"
-                Grid.Column="0"
-                HorizontalAlignment="Center"/>
+                            FontWeight="SemiBold" 
+                            FontSize="16" 
+                            Foreground="#1E3A5F" 
+                            Margin="5,0,0,0"
+                            Grid.Column="0"
+                            HorizontalAlignment="Center"/>
                     <TextBlock Text="Position" 
-                 FontWeight="SemiBold" 
-                 FontSize="16" 
-                 Foreground="White" 
-                 Margin="5,0,0,0"
-                 HorizontalAlignment="Center"
-                 Grid.Column="1"/>
+                         FontWeight="SemiBold" 
+                         FontSize="16" 
+                         Foreground="#1E3A5F" 
+                         Margin="5,0,0,0"
+                         HorizontalAlignment="Center"
+                         Grid.Column="1"/>
                     <TextBlock Text="Email" 
                 FontWeight="SemiBold" 
                 FontSize="16" 
-                Foreground="White" 
+                Foreground="#1E3A5F" 
                 Margin="5,0,0,0"
                 HorizontalAlignment="Center"
                 Grid.Column="2"/>
                     <TextBlock Text="Phone number" 
                 FontWeight="SemiBold" 
                 FontSize="16" 
-                Foreground="White" 
+                Foreground="#1E3A5F" 
                 Margin="5,0,0,0"
                 HorizontalAlignment="Left"
                 Grid.Column="3"/>

@@ -38,36 +38,28 @@
 
                     <StackPanel Grid.Row="1">
                         <RadioButton Content="Home"
-                                     Height="50"
-                                     Foreground="white"
-                                     FontSize="14"
                                      Style="{StaticResource MenuButtonTheme}"
                                      IsChecked="True"
-                                     Command="{Binding HomeViewCommand}"/>
+                                     Command="{Binding HomeViewCommand}"
+                                     Tag="pack://application:,,,/MVVM/View/Icons/home.png"/>
                         <RadioButton Content="{Binding IsAdmin, Converter={StaticResource BoolToStringConverter}, ConverterParameter=DepartmentName}"
-                                      Height="50"
-                                      Foreground="white"
-                                      FontSize="14"
                                       Style="{StaticResource MenuButtonTheme}"
                                       IsChecked="False"
                                       Command="{Binding DepartmentsViewCommand}"
-                                     Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=DepartmentButton}"/>
+                                     Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=DepartmentButton}"
+                                     Tag="pack://application:,,,/MVVM/View/Icons/department.png"/>
                         <RadioButton Content="Projects"
-                                      Height="50"
-                                      Foreground="white"
-                                      FontSize="14"
                                       Style="{StaticResource MenuButtonTheme}"
                                       IsChecked="False"
                                       Command="{Binding ProjectsViewCommand}"
-                                      Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=ProjectsButton}"/>
+                                      Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=ProjectsButton}"
+                                      Tag="pack://application:,,,/MVVM/View/Icons/project.png"/>
                         <RadioButton Content="Employees"
-                                       Height="50"
-                                       Foreground="white"
-                                       FontSize="14"
                                        Style="{StaticResource MenuButtonTheme}"
                                        IsChecked="False"
                                        Command="{Binding EmployeesViewCommand}"
-                                       Visibility="{Binding IsAdmin, Converter={ StaticResource BoolToVisibilityConverter}, ConverterParameter=Admin}"/>
+                                       Visibility="{Binding IsAdmin, Converter={ StaticResource BoolToVisibilityConverter}, ConverterParameter=Admin}"
+                                        Tag="pack://application:,,,/MVVM/View/Icons/employee.png"/>
                         <RadioButton Content="Personal information"
                                         Height="50"
                                         Foreground="white"
@@ -75,16 +67,15 @@
                                         Style="{StaticResource MenuButtonTheme}"
                                         IsChecked="False"
                                         Command="{Binding CurrentEmployeeDetailsViewCommand}"
-                                        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EditInfoButton}"/>
+                                        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EditInfoButton}"
+                                        Tag="pack://application:,,,/MVVM/View/Icons/account.png"/>
                     </StackPanel>
                     <RadioButton Content="Logout"
-                                        Height="50"
-                                        Foreground="white"
-                                        FontSize="14"
-                                        Style="{StaticResource MenuButtonTheme}"
-                                        IsChecked="{x:Null}"
-                                        Command="{Binding LogoutCommand}"
-                                        Grid.Row="2"/>
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 IsChecked="{x:Null}"
+                                 Command="{Binding LogoutCommand}"
+                                 Tag="pack://application:,,,/MVVM/View/Icons/logout.png"
+                                 Grid.Row="2"/>
                 </StackPanel>
                 
 

@@ -18,6 +18,9 @@
         <core:ButtonStateToColorConverter x:Key="ButtonStateToColorConverter"/>
         <core:BoolToStringConverter x:Key="BoolToStringConverter"/>
         <core:HoursToMinutesConverter x:Key="HoursToMinutesConverter"/>
+        <core:StatusToColorConverter x:Key="StatusToColorConverter"/>
+        <core:StatusToIconConverter x:Key="StatusToIconConverter"/>
+        <core:NullableTimeConverter x:Key="NullableTimeConverter"/>
     </UserControl.Resources>
 
     <ScrollViewer Style="{StaticResource ScrollViewerLayout}" >
@@ -28,10 +31,19 @@
             <StackPanel Orientation="Horizontal"
                     Margin="10"
                     Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EmployeesStatistics}">
-                <StackPanel Orientation="Horizontal">
-                    <oxy:PlotView Model="{Binding ActiveInactiveModel}" Height="300" Width="300"/>
-                    <oxy:PlotView Model="{Binding EmploymentTypesModel}" Height="300" Width="300"/>
+                <StackPanel Orientation="Horizontal" Margin="20">
+                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="10" Padding="10">
+                        <oxy:PlotView Model="{Binding ActiveInactiveModel}" 
+                      Height="300" Width="300" 
+                      Background="#4C86A8" />
+                    </Border>
+                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="10" Margin="10" Padding="10">
+                        <oxy:PlotView Model="{Binding EmploymentTypesModel}" 
+                      Height="300" Width="300" 
+                      Background="#4C86A8" />
+                    </Border>
                 </StackPanel>
+
             </StackPanel>
             <Border Width="400"
                     Height="100"
@@ -43,10 +55,28 @@
                             Foreground="White"
                             FontSize="28"
                             Margin="20,10,10,0"/>
-                        <TextBlock Text="Click here"
-                            Foreground="White"
-                            FontSize="18"
-                            Margin="20,10,10,0"/>
+                        <Button Content="Click here"
+                                BorderThickness="0"
+                                FontSize="16"
+                                Cursor="Hand"
+                                Margin="20,10,10,0"
+                                HorizontalAlignment="Right"
+                                Click="OpenPdfButton_Click"
+                                FocusVisualStyle="{x:Null}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="Background" Value="#ffb738"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
                     </StackPanel>
                 </Grid>
                 <Border.Background>
@@ -60,94 +90,308 @@
             <Button Content="Create Request" 
                     Margin="10" 
                     Width="150" 
+                    Height="50"
                     Command="{Binding CreateRequestCommand}"
-                    Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=CreateRequestButton}"/>
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=CreateRequestButton}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!-- Background Rectangle -->
+                            <Border x:Name="Border"
+                        Background="#4CAF50" 
+                        CornerRadius="8"
+                        BorderBrush="Transparent"
+                        BorderThickness="0">
+                                <TextBlock Text="{TemplateBinding Content}" 
+                               Foreground="White"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!-- Hover Effect -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#45A049" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#3E8E41" />
+                            </Trigger>
+                            <!-- Pressed Effect -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#388E3C" />
+                            </Trigger>
+                            <!-- Disabled State -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#B0BEC5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
 
             <Border Style="{StaticResource BorderLayout}" 
-                    Margin="10"
-                    Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}">
+        Margin="10"
+        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}"
+        Background="#f3f4f8"
+        CornerRadius="10"
+        Padding="15">
                 <StackPanel>
-                    <TextBlock Text="Manual Attendance Registration" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBlock Text="Manual Attendance Registration" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,20"
+                   Foreground="#2E3A59" />
 
-                    <StackPanel Orientation="Horizontal" Margin="10">
+                    <StackPanel Orientation="Horizontal" 
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                        <!-- Working Time Button -->
                         <Button Content="{Binding Working, Converter={StaticResource BoolToStringConverter}, ConverterParameter=WorkingTime}" 
-                                Command="{Binding SetTimeCommand}" 
-                                Margin="10,0,0,0"
-                                FocusVisualStyle="{x:Null}"
-                                Background="{Binding Working, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=WorkingTime}"/>
+                    Command="{Binding SetTimeCommand}" 
+                    Width="150" 
+                    Height="50"
+                    Margin="10"
+                    Background="{Binding Working, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=WorkingTime}" 
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Style="{StaticResource CustomButtonStyle}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <TextBlock Text="{TemplateBinding Content}" 
+                                       Foreground="White" 
+                                       FontSize="16" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       FontWeight="Bold" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
 
+                        <!-- Break Time Button -->
                         <Button Content="{Binding Pause, Converter={StaticResource BoolToStringConverter}, ConverterParameter=BreakTime}"
-                                Command="{Binding SetBreakTimeCommand}"
-                                Margin="10,0,0,0"
-                                FocusVisualStyle="{x:Null}"
-                                Background="{Binding Pause, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=Break}"
-                                IsEnabled="{Binding Working}"/>
+                    Command="{Binding SetBreakTimeCommand}"
+                    Width="150" 
+                    Height="50"
+                    Margin="10"
+                    Background="{Binding Pause, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=Break}"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    IsEnabled="{Binding Working}"
+                    Style="{StaticResource CustomButtonStyle}">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <TextBlock Text="{TemplateBinding Content}" 
+                                       Foreground="White" 
+                                       FontSize="16" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       FontWeight="Bold" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </Border>
 
 
-            <ListView ItemsSource="{Binding Requests}" 
-                      Margin="10"
-                      Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Requests }">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Request.RequestID}" Width="auto"/>
-                        <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding Requester.First_name}" Width="auto"/>
-                        <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding Requester.Last_name}" Width="auto"/>
-                        <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Request.RequestType}" Width="auto"/>
-                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Request.Status}" Width="auto"/>
-                        <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Request.RequestDate, StringFormat=d}" Width="auto"/>
-                        <GridViewColumn Header="Details">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="Vizualizare Detalii" 
-                                Command="{Binding DataContext.ViewRequestDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                                CommandParameter="{Binding}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Important}" Value="True">
-                                <Setter Property="Background" Value="Gold" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                            </DataTrigger>
 
-                            <DataTrigger Binding="{Binding Request.Status}" Value="Approved">
-                                <Setter Property="Background" Value="LightSeaGreen" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Request.Status}" Value="Rejected">
-                                <Setter Property="Background" Value="RosyBrown" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Request.Status}" Value="Pending">
-                                <Setter Property="Background" Value="Yellow" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <ComboBox x:Name="SortComboBox"
+                          Width="100"
+                          Height="30"
+                          SelectedItem="{Binding SelectedSortOption}"
+                          ItemsSource="{Binding SortOptions}"
+                          HorizontalAlignment="Left"
+                          Margin="20,0,0,10"
+                          Background="#f3f4f8"
+                          Foreground="Black"
+                          FontWeight="Bold"
+                          ToolTip="Sort requests by type or status" />
 
-            </ListView>
+                <ItemsControl ItemsSource="{Binding SortedRequests}" 
+                  Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Requests}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="1"
+                            Background="#527B99"
+                            BorderBrush="AntiqueWhite"
+                            CornerRadius="10"
+                            BorderThickness="0.5">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0"
+                                    Background="{Binding Request.Status, Converter={StaticResource StatusToColorConverter}}"
+                                    CornerRadius="5"
+                                    Width="10"/>
+
+                                        <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border CornerRadius="25"
+                                        Height="40" Width="40"
+                                        Background="{Binding Request.Status, Converter={StaticResource StatusToColorConverter}}">
+                                                <Image Source="{Binding Request.Status, Converter={StaticResource StatusToIconConverter}}"
+                                           Width="24" Height="24"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                        </Grid>
+
+                                        <StackPanel Grid.Column="2" Margin="10,0,0,0" VerticalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Requester.Last_name}" 
+                                               Margin="2"
+                                               FontWeight="Bold" 
+                                               FontSize="16" 
+                                               Foreground="White" />
+                                                <TextBlock Text="{Binding Requester.First_name}" Margin="2"
+                                               FontWeight="Bold" 
+                                               FontSize="16" 
+                                               Foreground="White" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="180"/>
+                                                        <ColumnDefinition Width="150"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0"
+                                                    Orientation="Horizontal">
+                                                        <TextBlock Text="Request Type: " 
+                                                       Margin="2"
+                                                       FontWeight="Light" 
+                                                       FontSize="16" 
+                                                       Foreground="White" />
+                                                        <TextBlock Text="{Binding Request.RequestType}" Margin="2"
+                                                       FontWeight="Light" 
+                                                       FontSize="16" 
+                                                       Foreground="White" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="1"
+                                                    Orientation="Horizontal">
+                                                        <TextBlock Text="Status: " 
+                                                       Margin="2"
+                                                       FontWeight="Light" 
+                                                       FontSize="16" 
+                                                       Foreground="White" />
+                                                        <TextBlock Text="{Binding Request.Status}" 
+                                                       Margin="2"
+                                                       FontWeight="Light" 
+                                                       FontSize="16" 
+                                                       Foreground="White" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Date: " 
+                                               Margin="2"
+                                               FontWeight="Light" 
+                                               FontSize="16" 
+                                               Foreground="White" />
+                                                <TextBlock Text="{Binding Request.RequestDate, StringFormat=MM/dd/yyyy}" 
+                                               Margin="2"
+                                               FontWeight="Light"
+                                               FontSize="16" 
+                                               Foreground="White" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <Button Grid.Column="3"
+                                    Content="View Details"
+                                    Style="{StaticResource CustomButtonStyle}"
+                                    Background="#527B99"
+                                    BorderBrush="#3E3F2D"
+                                    BorderThickness="1"
+                                    FocusVisualStyle="{x:Null}"
+                                    Height="30"
+                                    Margin="10" 
+                                    Command="{Binding DataContext.ViewRequestDetailsCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+
+
+
+
+
             <StackPanel Orientation="Vertical"
                         Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}">
                 <TextBlock Text="Clocking Data" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
-                <ListView ItemsSource="{Binding ClockingData}" Margin="10">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID_clocking}" Width="auto"/>
-                            <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding ID_employee}" Width="auto"/>
-                            <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date_of_clocking, StringFormat=d}" Width="auto"/>
-                            <GridViewColumn Header="Start Hour" DisplayMemberBinding="{Binding Start_hour}" Width="auto"/>
-                            <GridViewColumn Header="End Hour" DisplayMemberBinding="{Binding End_hour}" Width="auto"/>
-                            <GridViewColumn Header="Pause" 
-                                                DisplayMemberBinding="{Binding BreakHours, Converter={StaticResource HoursToMinutesConverter}}"  
-                                                Width="auto"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                <ItemsControl ItemsSource="{Binding ClockingData}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#F9FAFB"
+                                    CornerRadius="10"
+                                    BorderBrush="#DDDDDD"
+                                    BorderThickness="1"
+                                    Margin="5,5,5,5"
+                                    Padding="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="150" />
+                                        <ColumnDefinition Width="150" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Date and Time Details -->
+                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                        <TextBlock Text="Date" FontWeight="Bold" Foreground="#0078D4" />
+                                        <TextBlock Text="{Binding Date_of_clocking, StringFormat={}{0:dd/MM/yyyy}}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                                        <TextBlock Text="Start Hour" FontWeight="Bold" Foreground="#0078D4" />
+                                        <TextBlock Text="{Binding Start_hour, StringFormat={}{0:hh\\:mm}}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2" Orientation="Vertical">
+                                        <TextBlock Text="End Hour" FontWeight="Bold" Foreground="#0078D4" />
+                                        <TextBlock Text="{Binding End_hour, StringFormat={}{0:hh\\:mm}}" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="3" Orientation="Vertical">
+                                        <TextBlock Text="Break Time" FontWeight="Bold" Foreground="#0078D4" />
+                                        <TextBlock Text="{Binding BreakHours, StringFormat={}{0:hh\\:mm}, Converter={StaticResource NullableTimeConverter}}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

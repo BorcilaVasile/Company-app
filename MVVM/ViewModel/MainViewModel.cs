@@ -268,7 +268,10 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public void Logout()
         {
-            MainPageViewModel.Instance.NavigateToLoginView();
+            var result = MessageBox.Show("Are you sure you want to logout?", "Logout Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+                MainPageViewModel.Instance.NavigateToLoginView();
         }
     }
 }

@@ -4,78 +4,103 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Administrare_firma.MVVM.View" 
-             xmlns:viewmodel="clr-namespace:Administrare_firma.MVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddEmployeeViewModel}"
+             xmlns:viewmodel="clr-namespace:Administrare_firma.MVVM.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:AddEmployeeViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ScrollViewer Style="{StaticResource ScrollViewerLayout}">
-            <StackPanel Orientation="Vertical">
-                <Border Style="{StaticResource BorderLayout}">
-                    <StackPanel>
-                        <TextBlock Text="Employee Informations" Margin="13" Style="{StaticResource TextBlockLayout}"/>
-                    </StackPanel>
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
+    <Grid Background="#F3F4F6">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical" Margin="20">
+                <!-- Header -->
+                <Border Background="#4C86A8" CornerRadius="10" Padding="10" Margin="0,0,0,20">
+                    <TextBlock Text="Add New Employee" 
+                               FontSize="22" 
+                               FontWeight="Bold" 
+                               Foreground="White" 
+                               HorizontalAlignment="Center" />
                 </Border>
+
+                <!-- Employee Form -->
                 <Border Background="White" CornerRadius="10" Padding="20" BorderBrush="#DDDDDD" BorderThickness="1" Margin="0,0,0,20">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="First Name:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.First_name}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Last Name:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.Last_name}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Email:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.Email}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Phone Number:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.Phone_number}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="CNP:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.CNP}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Date of Birth:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center" />
-                            <DatePicker SelectedDate="{Binding CurrentEmployee.Date_of_birth}" />
-                        </StackPanel>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Home Address:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.Home_address}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Department:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentDepartment.Department.Nume}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Post:" FontWeight="Bold" />
-                            <TextBlock Text="{Binding CurrentEmployee.Post.Nume}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Base Salary:" FontWeight="Bold" />
-                            <TextBox Text="{Binding CurrentEmployee.Base_salary}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Contract Type:" FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center" />
-                            <ComboBox ItemsSource="{Binding ContractTypes}" 
+                        <!-- Form Fields -->
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="First Name:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CurrentEmployee.First_name}" Margin="5" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Last Name:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CurrentEmployee.Last_name}" Margin="5" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CurrentEmployee.Email}" Margin="5" />
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Phone Number:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentEmployee.Phone_number}" Margin="5" />
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="CNP:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentEmployee.CNP}" Margin="5" />
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Date of Birth:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <DatePicker Grid.Row="5" Grid.Column="1" SelectedDate="{Binding CurrentEmployee.Date_of_birth}" Margin="5" />
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Home Address:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding CurrentEmployee.Home_address}" Margin="5" />
+
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Department:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding CurrentDepartment.Department.Nume}" Margin="5" />
+
+                        <TextBlock Grid.Row="8" Grid.Column="0" Text="Post:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding CurrentEmployee.Post.Nume}" Margin="5" />
+
+                        <TextBlock Grid.Row="9" Grid.Column="0" Text="Base Salary:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding CurrentEmployee.Base_salary}" Margin="5" />
+
+                        <TextBlock Grid.Row="10" Grid.Column="0" Text="Contract Type:" FontWeight="Bold" VerticalAlignment="Center" />
+                        <ComboBox Grid.Row="10" Grid.Column="1" ItemsSource="{Binding ContractTypes}" 
                                   SelectedItem="{Binding CurrentEmployee.Contract_type}" 
-                                  Width="200" />
-                        </StackPanel>
-
-
-                    </StackPanel>
+                                  Width="200" Margin="5" />
+                    </Grid>
                 </Border>
-                <Button x:Name="SaveButton"
-                    Content="Save"
-                    Command="{Binding SaveCommand}"
-                    CommandParameter="{Binding CurrentEmployee}"/>
-                <Button x:Name="CancelButton"
-                    Content="Cancel"
-                    Command="{Binding DepartmentDetailsViewCommand}"
-                    CommandParameter="{Binding CurrentDepartment}"/>
+
+                <!-- Buttons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <Button Content="Save"
+                            Command="{Binding SaveCommand}" 
+                            Width="120" Height="40" 
+                            Margin="10"
+                            FontWeight="Bold"
+                            Style="{StaticResource StyledButton}"
+                            Background="#4CAF50"
+                            Foreground="White"/>
+
+                    <Button Content="Cancel"
+                            Command="{Binding DepartmentDetailsViewCommand}" 
+                            CommandParameter="{Binding CurrentDepartment}" 
+                            Width="120" Height="40" 
+                            Margin="10"
+                            FontWeight="Bold"
+                            Style="{StaticResource StyledButton}"
+                            Background="#E53935"
+                            Foreground="White"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

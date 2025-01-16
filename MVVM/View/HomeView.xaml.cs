@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Administrare_firma.MVVM.View
 {
@@ -23,6 +13,23 @@ namespace Administrare_firma.MVVM.View
         public HomeView()
         {
             InitializeComponent();
+        }
+        private void OpenPdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            string pdfPath = "C:\\Users\\HUAWEI\\Desktop\\understanding-our-political-nature.pdf";
+
+            if (File.Exists(pdfPath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = pdfPath,
+                    UseShellExecute = true // Folosește aplicația implicită de vizualizare PDF
+                });
+            }
+            else
+            {
+                MessageBox.Show("Fișierul PDF nu a fost găsit.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

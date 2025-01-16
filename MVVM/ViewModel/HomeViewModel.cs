@@ -29,8 +29,36 @@ namespace Administrare_firma.MVVM.ViewModel
         public RelayCommand CreateViewRequestCommand { get; }
         public RelayCommand CreateRequestCommand { get; }
         public RelayCommand SetTimeCommand { get; }
+        public RelayCommand SortRequestsCommand { get; }
         public RelayCommand SetBreakTimeCommand {  get; }
         public MainViewModel _mainViewModel;
+
+        private string _selectedSortOption;
+        public string SelectedSortOption
+        {
+            get => _selectedSortOption;
+            set
+            {
+                _selectedSortOption = value;
+                OnPropertyChanged(nameof(SelectedSortOption));
+                SortRequests(); 
+            }
+        }
+
+        public ObservableCollection<Request_informations> SortedRequests { get; set; }
+        public List<string> SortOptions { get; set; } = new List<string>
+                {
+                    "All",
+                    "Approved",
+                    "Pending",
+                    "Rejected",
+                    "Zile libere",
+                    "Concediu",
+                    "Marire salariu",
+                    "Invoire"
+                };
+
+
 
         private ObservableCollection<Request_informations> _requests;
         public ObservableCollection<Request_informations> Requests
@@ -338,6 +366,49 @@ namespace Administrare_firma.MVVM.ViewModel
 
             }
         }
+
+        private void SortRequests()
+        {
+            if (Requests == null) return;
+
+            switch (SelectedSortOption)
+            {
+                case "Approved":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.Status == "Approved"));
+                    break;
+
+                case "Pending":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.Status == "Pending"));
+                    break;
+
+                case "Rejected":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.Status == "Rejected"));
+                    break;
+
+                case "Zile libere":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.RequestType == "Zile libere"));
+                    break;
+
+                case "Invoire":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.RequestType == "Invoire"));
+                    break;
+
+                case "Concediu":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.RequestType == "Concediu"));
+                    break;
+
+                case "Marire salariu":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.RequestType == "Marire salariu"));
+                    break;
+
+                default:
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests);
+                    break;
+            }
+
+            OnPropertyChanged(nameof(SortedRequests));
+        }
+
 
         private void NavigateToRequestDetailsView(object parameter)
         {

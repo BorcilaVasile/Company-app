@@ -23,7 +23,7 @@
     <Style x:Key="DepartmentCardBorderStyle" TargetType="Border">
         <Setter Property="Background" Value="white"/>
         <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="350"/>
+        <Setter Property="Height" Value="250"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="Margin" Value="0,10,0,0"/>
         <Setter Property="BorderThickness" Value="0"/>
