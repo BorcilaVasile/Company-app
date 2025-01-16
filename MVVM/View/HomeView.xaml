@@ -48,7 +48,8 @@
             <Border Width="400"
                     Height="100"
                     CornerRadius="10"
-                    Margin="45,0,0,0">
+                    Margin="0"
+                    HorizontalAlignment="Center">
                 <Grid>
                     <StackPanel>
                         <TextBlock Text="Learn about our politics"
@@ -131,11 +132,11 @@
 
 
             <Border Style="{StaticResource BorderLayout}" 
-        Margin="10"
-        Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}"
-        Background="#f3f4f8"
-        CornerRadius="10"
-        Padding="15">
+                    Margin="10"
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}"
+                    Background="#f3f4f8"
+                    CornerRadius="10"
+                    Padding="15">
                 <StackPanel>
                     <TextBlock Text="Manual Attendance Registration" 
                    FontSize="22" 
@@ -149,14 +150,14 @@
                     VerticalAlignment="Center">
                         <!-- Working Time Button -->
                         <Button Content="{Binding Working, Converter={StaticResource BoolToStringConverter}, ConverterParameter=WorkingTime}" 
-                    Command="{Binding SetTimeCommand}" 
-                    Width="150" 
-                    Height="50"
-                    Margin="10"
-                    Background="{Binding Working, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=WorkingTime}" 
-                    Foreground="White"
-                    FontWeight="Bold"
-                    Style="{StaticResource CustomButtonStyle}">
+                                Command="{Binding SetTimeCommand}" 
+                                Width="150" 
+                                Height="50"
+                                Margin="10"
+                                Background="{Binding Working, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=WorkingTime}" 
+                                Foreground="White"
+                                FontWeight="Bold"
+                                Style="{StaticResource CustomButtonStyle}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid Background="{TemplateBinding Background}">
@@ -172,16 +173,16 @@
                         </Button>
 
                         <!-- Break Time Button -->
-                        <Button Content="{Binding Pause, Converter={StaticResource BoolToStringConverter}, ConverterParameter=BreakTime}"
-                    Command="{Binding SetBreakTimeCommand}"
-                    Width="150" 
-                    Height="50"
-                    Margin="10"
-                    Background="{Binding Pause, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=Break}"
-                    Foreground="White"
-                    FontWeight="Bold"
-                    IsEnabled="{Binding Working}"
-                    Style="{StaticResource CustomButtonStyle}">
+                            <Button Content="{Binding Pause, Converter={StaticResource BoolToStringConverter}, ConverterParameter=BreakTime}"
+                                    Command="{Binding SetBreakTimeCommand}"
+                                    Width="150" 
+                                    Height="50"
+                                    Margin="10"
+                                    Background="{Binding Pause, Converter={StaticResource ButtonStateToColorConverter}, ConverterParameter=Break}"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    IsEnabled="{Binding Working}"
+                                    Style="{StaticResource CustomButtonStyle}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Grid Background="{TemplateBinding Background}">
@@ -212,7 +213,8 @@
                           Background="#f3f4f8"
                           Foreground="Black"
                           FontWeight="Bold"
-                          ToolTip="Sort requests by type or status" />
+                          ToolTip="Sort requests by type or status"
+                          Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Requests}"/>
 
                 <ItemsControl ItemsSource="{Binding SortedRequests}" 
                   Visibility="{Binding IsEmployee, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Requests}">
@@ -385,7 +387,7 @@
 
                                     <StackPanel Grid.Column="3" Orientation="Vertical">
                                         <TextBlock Text="Break Time" FontWeight="Bold" Foreground="#0078D4" />
-                                        <TextBlock Text="{Binding BreakHours, StringFormat={}{0:hh\\:mm}, Converter={StaticResource NullableTimeConverter}}" />
+                                        <TextBlock Text="{Binding BreakHours, Converter={StaticResource HoursToMinutesConverter}}" />
                                     </StackPanel>
                                 </Grid>
                             </Border>

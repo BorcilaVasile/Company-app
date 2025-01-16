@@ -154,6 +154,11 @@ namespace Administrare_firma.Core
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                return "No Data";
+            }
+
             if (value is decimal hours)
             {
                 TimeSpan timeSpan = TimeSpan.FromHours((double)hours);

@@ -13,6 +13,7 @@
              d:DesignWidth="800">
     <UserControl.Resources>
         <core:NullableTimeConverter x:Key="NullableTimeConverter" />
+        <core:HoursToMinutesConverter x:Key="HoursToMinutesConverter"/>
     </UserControl.Resources>
 
 
@@ -170,7 +171,7 @@
 
                                             <StackPanel Grid.Column="3" Orientation="Vertical">
                                                 <TextBlock Text="Break Time" FontWeight="Bold" Foreground="#0078D4" />
-                                                <TextBlock Text="{Binding BreakHours, StringFormat={}{0:hh\\:mm}, Converter={StaticResource NullableTimeConverter}}" />
+                                                <TextBlock Text="{Binding BreakHours, Converter={StaticResource HoursToMinutesConverter}}" />
                                             </StackPanel>
                                         </Grid>
                                     </Border>

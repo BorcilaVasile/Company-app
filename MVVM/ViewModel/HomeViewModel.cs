@@ -463,8 +463,10 @@ namespace Administrare_firma.MVVM.ViewModel
                     _workStartTime = DateTime.Now;
                     _workSessionTimer.Start(); // Start auto-close timer
                     Working = true;
+                
                 }
             }
+            LoadClockingData();
         }
         private void SetBreak()
         {
@@ -472,20 +474,17 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 if (_pauseStartTime.HasValue)
                 {
-                    // Calculăm durata pauzei
                     var pauseDuration = DateTime.Now - _pauseStartTime.Value.Add(TimeSpan.FromSeconds(-3000));
                     _totalPauseDuration += pauseDuration;
 
                     Console.WriteLine($"Updated pause duration: {_totalPauseDuration.TotalMinutes} minutes");
 
-                    // Resetăm starea pauzei
                     _pauseStartTime = null;
                     Pause = false;
                 }
             }
             else
             {
-                // Începem o nouă pauză
                 _pauseStartTime = DateTime.Now;
                 Pause = true;
             }
@@ -514,13 +513,12 @@ namespace Administrare_firma.MVVM.ViewModel
         {
             using (var context = new CompanyDataContext())
             {
-                // Fetch clocking records for the current employee, excluding the admin
                 var clockingRecords = context.Clockings
                     .Where(c => c.ID_employee == employeeID && employeeID != 0) // Exclude admin
                     .OrderByDescending(c => c.Date_of_clocking) // Sort by date
+                    .ThenByDescending(c => c.Start_hour) // Then sort by start hour descending
                     .ToList();
 
-                // Populate the ClockingData collection
                 ClockingData = new ObservableCollection<Clocking>(clockingRecords);
             }
         }
