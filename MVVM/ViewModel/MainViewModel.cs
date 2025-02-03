@@ -91,6 +91,19 @@ namespace Administrare_firma.MVVM.ViewModel
         //le voi folosi pentru butoanele disponibile doar pentru manageri si doar pentru admin
         public bool adminLevel = false;
         public bool managerLevel = false;
+        public string _notificationTitle; 
+        public string NotificationTitle
+        {
+            get => _notificationTitle;
+            set
+            {
+                if (_notificationTitle != value)
+                {
+                    _notificationTitle = value;
+                    OnPropertyChanged(nameof(NotificationTitle));
+                }
+            }
+        }
         public MainViewModel(string TypeOfUser, int employeeID)
         {
 
@@ -111,7 +124,7 @@ namespace Administrare_firma.MVVM.ViewModel
             _isEmployee = !IsAdmin && !IsManager;
             
             _employeeService = new EmployeeService();
-            _numberOfNotifications = CountNumberOfNotifications();
+            UpdateNumberOfNotifications();
             HomeVM = new HomeViewModel(this, employeeID, IsAdmin, IsManager);
 
             CurrentView = HomeVM;
@@ -145,7 +158,17 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         public void UpdateNumberOfNotifications()
         {
-            _numberOfNotifications= CountNumberOfNotifications();
+            _numberOfNotifications = CountNumberOfNotifications();
+            if (_numberOfNotifications > 0)
+            {
+                _notificationTitle = $"Notifications ({_numberOfNotifications})"; 
+            }
+            else
+            {
+                _notificationTitle = "Notifications";
+            }
+
+            OnPropertyChanged(nameof(NotificationTitle));
         }
         public int CountNumberOfNotifications()
         {

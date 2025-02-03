@@ -7,7 +7,6 @@
 			xmlns:view="clr-namespace:Administrare_firma.MVVM.View"
             xmlns:viewModel="clr-namespace:Administrare_firma.MVVM.ViewModel"
             xmlns:core="clr-namespace:Administrare_firma.Core"
-            d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
             mc:Ignorable="d"   >
 
     <UserControl.Resources>
@@ -74,7 +73,7 @@
                                         Command="{Binding CurrentEmployeeDetailsViewCommand}"
                                         Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EditInfoButton}"
                                         Tag="pack://application:,,,/MVVM/View/Icons/account.png"/>
-                        <RadioButton Content="{Binding NumberOfNotifications, Converter={StaticResource NotificationConverter}, UpdateSourceTrigger=PropertyChanged}"
+                        <RadioButton Content="{Binding NotificationTitle}"
                                      Foreground="{Binding NumberOfNotifications, Converter={StaticResource NotificationColorConverter}}"
                                      Height="50"
                                      FontSize="14"
