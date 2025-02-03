@@ -37,10 +37,10 @@ namespace Administrare_firma.MVVM.ViewModel
 
         private void LoadDepartmentsWithManagers()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 var query = from department in context.Departments
-                            join manager in context.Employees
+                            join manager in context.Employee
                             on department.ID_department equals manager.ID_department into managerGroup
                             from manager in managerGroup
                             .Where(m => (context.Posts
@@ -58,7 +58,7 @@ namespace Administrare_firma.MVVM.ViewModel
 
                 foreach (var item in query)
                 {
-                    var employees = context.Employees
+                    var employees = context.Employee
                         .Where(e => e.ID_department == item.Department.ID_department)
                         .Select(e => new
                         {

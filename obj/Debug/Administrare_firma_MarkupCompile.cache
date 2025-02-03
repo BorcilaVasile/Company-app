@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\App.xaml
-211548565675
+24845522395
 
-381725889034
-192132354894
-MVVM\View\AddEmployeeView.xaml;MVVM\View\CreateRequestView.xaml;MVVM\View\EmployeeDetailsView.xaml;MVVM\View\EmployeeEditView.xaml;MVVM\View\MainPageWindow.xaml;MVVM\View\DepartmentDetailsView.xaml;MVVM\View\DepartmentsView.xaml;MVVM\View\EmployeesView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginView.xaml;MVVM\View\MainView.xaml;MVVM\View\ProjectsView.xaml;MVVM\View\RequestDetailsView.xaml;MVVM\View\SignUpView.xaml;Theme\Button.xaml;Theme\DepartmentCard.xaml;Theme\DepartmentDetailsLayout.xaml;Theme\InputField.xaml;Theme\LoginPage.xaml;Theme\MenuButtonTheme.xaml;Theme\TabLayout.xaml;
+44-1845066758
+22-384324935
+MVVM\View\AddEmployeeView.xaml;MVVM\View\CreateEvaluationView.xaml;MVVM\View\CreateRequestView.xaml;MVVM\View\EmployeeDetailsView.xaml;MVVM\View\EmployeeEditView.xaml;MVVM\View\EvaluationView.xaml;MVVM\View\MainPageWindow.xaml;MVVM\View\DepartmentDetailsView.xaml;MVVM\View\DepartmentsView.xaml;MVVM\View\EmployeesView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginView.xaml;MVVM\View\MainView.xaml;MVVM\View\NotificationsView.xaml;MVVM\View\ProjectsView.xaml;MVVM\View\RequestDetailsView.xaml;MVVM\View\SignUpView.xaml;Theme\Button.xaml;Theme\DepartmentCard.xaml;Theme\DepartmentDetailsLayout.xaml;Theme\InputField.xaml;Theme\LoginPage.xaml;Theme\MenuButtonTheme.xaml;Theme\TabLayout.xaml;
 
 False
 

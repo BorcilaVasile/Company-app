@@ -64,9 +64,9 @@ namespace Administrare_firma.MVVM.ViewModel
 
         private void LoadEmployees()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
-                var query = from employee in context.Employees
+                var query = from employee in context.Employee
                             join department in context.Departments
                             on employee.ID_department equals department.ID_department
                             join post in context.Posts
@@ -165,7 +165,7 @@ namespace Administrare_firma.MVVM.ViewModel
                 {
                     try
                     {
-                        EmployeeService.DeleteEmployee(_selectedEmployee);
+                        _mainViewModel._employeeService.DeleteEmployee(_selectedEmployee);
                         MessageBox.Show("Employee deleted successfully.");
                     }
                     catch (Exception ex)

@@ -55,3 +55,13 @@ C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\ProjectsView.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\CreateRequestView.baml
 C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\CreateRequestView.g.cs
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\bin\Debug\EntityFramework.dll
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\bin\Debug\EntityFramework.xml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\CreateEvaluationView.g.cs
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\CreateEvaluationView.baml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\EvaluationView.g.cs
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\EvaluationView.baml
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\NotificationsView.g.cs
+C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\MVVM\View\NotificationsView.baml

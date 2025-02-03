@@ -4,18 +4,22 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Data.Linq;
+using Administrare_firma.MVVM.View;
+using System.ComponentModel;
 
 
 namespace Administrare_firma.MVVM.ViewModel
 {
-    public class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject, INotifyPropertyChanged
     {
-        private readonly EmployeeService _employeeService;
+        public readonly EmployeeService _employeeService;
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand DepartmentsViewCommand { get; set; }
         public RelayCommand ProjectsViewCommand { get; set; }
         public RelayCommand EmployeesViewCommand { get; set; }
+        public RelayCommand NotificationViewCommand { get; set; }
         public RelayCommand DepartmentDetailsViewCommand { get; set; }
         public RelayCommand EmployeeDetailsViewCommand { get; set; }
         public RelayCommand EmployeeEditViewCommand { get; set; }
@@ -25,6 +29,8 @@ namespace Administrare_firma.MVVM.ViewModel
         public RelayCommand CreateRequestCommand { get; set; }
         public RelayCommand CurrentEmployeeEditViewCommand { get; set; }
         public RelayCommand CurrentEmployeeDetailsViewCommand { get; set; }
+        public RelayCommand CreateEvaluationViewCommand { get; set; }
+        public RelayCommand EvaluationViewCommand { get; set; }
         public RelayCommand LogoutCommand { get; set; }
         public HomeViewModel HomeVM { get; set; }
         public DepartmentsViewModel DepartmentsVM { get; set; }
@@ -36,6 +42,9 @@ namespace Administrare_firma.MVVM.ViewModel
         public AddEmployeeViewModel AddEmployeeVM { get; set; }
         public RequestDetailsViewModel RequestDetailsVM { get; set; }
         public CreateRequestViewModel CreateRequestVM { get; set; }
+        public CreateEvaluationViewModel CreateEvaluationVM { get; set; }
+        public EvaluationViewModel EvaluationVM { get; set; }
+        public NotificationsViewModel NotificationsVM { get; set; }
         private object _currentView;
 
         public object CurrentView
@@ -45,6 +54,17 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 _currentView = value;
                 OnPropertyChanged(nameof(CurrentView));
+            }
+        }
+        private int _numberOfNotifications;
+        public int NumberOfNotifications
+        {
+            get { return _numberOfNotifications; }
+            set
+            {
+                _numberOfNotifications = value;
+                Console.WriteLine($"NumberOfNotifications set to: {value}");
+                OnPropertyChanged(nameof(NumberOfNotifications));
             }
         }
         private bool _isEmployee;
@@ -89,16 +109,18 @@ namespace Administrare_firma.MVVM.ViewModel
             }
 
             _isEmployee = !IsAdmin && !IsManager;
+            
             _employeeService = new EmployeeService();
+            _numberOfNotifications = CountNumberOfNotifications();
             HomeVM = new HomeViewModel(this, employeeID, IsAdmin, IsManager);
 
             CurrentView = HomeVM;
 
-            //Home view e acelasi pentru admin si manager, vor fi diferite doar statisticile si request-urile
             HomeViewCommand = new RelayCommand(o => NavigateToHomeView(_employeeID, IsAdmin, IsManager));
             DepartmentsViewCommand = new RelayCommand(o => NavigateToDepartmentsView());
             EmployeesViewCommand = new RelayCommand(o => NavigateToEmployeesView());
             ProjectsViewCommand = new RelayCommand(o => NavigateToProjectsView());
+            NotificationViewCommand = new RelayCommand(o => NavigateToNotificationView());
             DepartmentDetailsViewCommand = new RelayCommand(o =>
             {
                 if (o is DepartmentWithManager departmentWithManager)
@@ -121,6 +143,19 @@ namespace Administrare_firma.MVVM.ViewModel
             CurrentEmployeeDetailsViewCommand = new RelayCommand(o => NavigateToCurrentEmployeeDetailsView());
             LogoutCommand = new RelayCommand(o => Logout());
         }
+        public void UpdateNumberOfNotifications()
+        {
+            _numberOfNotifications= CountNumberOfNotifications();
+        }
+        public int CountNumberOfNotifications()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                int number = context.Notifications.Where(n => n.ID_receiver == _employeeID && n.Seen==false).Count();
+                return number;
+            }
+            return 0;
+        }
         public void NavigateToHomeView(int employeeID, bool IsAdmin, bool IsManager)
         {
             HomeVM = new HomeViewModel(this, employeeID, IsAdmin, IsManager);
@@ -135,10 +170,10 @@ namespace Administrare_firma.MVVM.ViewModel
             }
             else if (IsManager)
             {
-                using (var context = new CompanyDataContext())
+                using (var context = new ApplicationDbContext())
                 {
                     var departmentWithManager = (from department in context.Departments
-                                                 join manager in context.Employees
+                                                 join manager in context.Employee
                                                  on department.ID_department equals manager.ID_department
                                                  where manager.ID == _employeeID
                                                  select new DepartmentWithManager
@@ -149,8 +184,8 @@ namespace Administrare_firma.MVVM.ViewModel
 
                     if (departmentWithManager != null)
                     {
-                        var employeesData = (from employee in context.Employees
-                                             where employee.ID_department == departmentWithManager.Department.ID_department
+                        var employeesData = (from employee in context.Employee
+                                             where employee.ID_department == departmentWithManager.Department.ID_department && employee.ID != departmentWithManager.Manager.ID
                                              select new
                                              {
                                                  Employee = employee,
@@ -192,6 +227,12 @@ namespace Administrare_firma.MVVM.ViewModel
             ProjectsVM = new ProjectsViewModel();
             CurrentView = ProjectsVM;
         }
+
+        public void NavigateToNotificationView()
+        {
+            NotificationsVM = new NotificationsViewModel(this,_employeeID);
+            CurrentView = NotificationsVM;
+        }
         public void NavigateToDepartmentDetailsView(DepartmentWithManager departmentWithManager)
         {
             DepartmentDetailsVM = new DepartmentDetailsViewModel(departmentWithManager, this, IsAdmin);
@@ -200,12 +241,12 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public void NavigateToEmployeeDetailsView(DepartmentWithManager departmentWithManager, Employee employee, string navigationSource)
         {
-            EmployeeDetailsVM = new EmployeeDetailsViewModel(departmentWithManager, this, employee,navigationSource);
+            EmployeeDetailsVM = new EmployeeDetailsViewModel(departmentWithManager, this, employee,navigationSource,IsManager);
             CurrentView = EmployeeDetailsVM;
         }
         public void NavigateToEmployeeDetailsView(Employee employee, string navigationSource)
         {
-            EmployeeDetailsVM = new EmployeeDetailsViewModel(employee, this, navigationSource);
+            EmployeeDetailsVM = new EmployeeDetailsViewModel(employee, this, navigationSource, IsManager);
             CurrentView = EmployeeDetailsVM;
         }
 
@@ -234,9 +275,10 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public void NavigateToCreateRequestView(int employeeID)
         {
-            CreateRequestVM = new CreateRequestViewModel(employeeID, this, IsManager);
+            CreateRequestVM = new CreateRequestViewModel(this,employeeID, IsManager);
             CurrentView = CreateRequestVM;
         }
+
         public void NavigateToCurrentEmployeeEditView()
         {
             EmployeeEditVM = new EmployeeEditViewModel(this, _employeeID, _employeeService, "Home");
@@ -245,17 +287,18 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public void NavigateToCurrentEmployeeDetailsView()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
-                var loadOptions = new DataLoadOptions();
-                loadOptions.LoadWith<Employee>(e => e.Post);
-                context.LoadOptions = loadOptions;
-
-                var employee = context.Employees.SingleOrDefault(e => e.ID ==_employeeID);
+                var employee = context.Employee
+                             .SingleOrDefault(e => e.ID == _employeeID);
 
                 if (employee != null)
                 {
-                    EmployeeDetailsVM = new EmployeeDetailsViewModel(employee, this,"Home");
+                    var post = employee.ID_post.HasValue
+                       ? context.Posts.SingleOrDefault(p => p.ID_post == employee.ID_post.Value)
+                       : null;
+
+                    EmployeeDetailsVM = new EmployeeDetailsViewModel(employee, this,"Home",IsManager);
                     CurrentView = EmployeeDetailsVM;
                 }
                 else
@@ -265,6 +308,17 @@ namespace Administrare_firma.MVVM.ViewModel
             }
         }
 
+        public void NavigateToCreateEvaluationView(DepartmentWithManager departmentWithManager, Employee employee, string navigationSource) 
+        {
+            CreateEvaluationVM = new CreateEvaluationViewModel(this,departmentWithManager, employee,_employeeService, navigationSource);
+            CurrentView = CreateEvaluationVM;
+        }
+
+        public void NavigateToEvaluationView(DepartmentWithManager departmentWithManager, Employee employee, string navigationSource)
+        {
+            EvaluationVM = new EvaluationViewModel(this, departmentWithManager,employee,_employeeService, navigationSource);
+            CurrentView = EvaluationVM;
+        }
 
         public void Logout()
         {
@@ -272,6 +326,11 @@ namespace Administrare_firma.MVVM.ViewModel
 
             if (result == MessageBoxResult.Yes)
                 MainPageViewModel.Instance.NavigateToLoginView();
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

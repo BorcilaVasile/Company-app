@@ -92,7 +92,7 @@ namespace Administrare_firma.MVVM.ViewModel
         private void ExecuteLogin()
         {
             MainPageViewModel.Instance.TypeOfUser = "angajat";
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 var query = context.Accounts
                     .FirstOrDefault(account => account.Email == _email && account.Password == _password);
@@ -104,7 +104,7 @@ namespace Administrare_firma.MVVM.ViewModel
                         MainPageViewModel.Instance.TypeOfUser = "admin";
                     else
                     {
-                        bool IsManager = context.Employees.Any(e => e.ID == query.EmployeeID &&
+                        bool IsManager = context.Employee.Any(e => e.ID == query.EmployeeID &&
                                         context.Posts.Any(p => p.ID_post == e.ID_post && p.Level_of_importance == 3));
                         if (IsManager)
                             MainPageViewModel.Instance.TypeOfUser = "manager";

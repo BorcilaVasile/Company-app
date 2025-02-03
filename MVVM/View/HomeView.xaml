@@ -138,6 +138,34 @@
                     CornerRadius="10"
                     Padding="15">
                 <StackPanel>
+                    <TextBlock Text="{Binding TotalAmountDue, StringFormat=C0}" FontSize="26" Foreground="Green" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="26"
+                               Foreground="Green"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="{Binding TotalWorkedHours}" />
+
+                        <TextBlock FontSize="26" 
+                               Foreground="Gray" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               Text="/"
+                               Margin="2"/>
+                        <TextBlock FontSize="26"
+                               Foreground="Green"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="{Binding NecessaryHours}" 
+                               Margin="2"/>
+                        <TextBlock FontSize="20" 
+                                Foreground="Gray" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Text=" hours"
+                                Margin="5"/>       
+                    </StackPanel>
+
                     <TextBlock Text="Manual Attendance Registration" 
                    FontSize="22" 
                    FontWeight="Bold" 
@@ -344,7 +372,7 @@
 
 
 
-            <StackPanel Orientation="Vertical"
+            <!--<StackPanel Orientation="Vertical"
                         Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Clocking}">
                 <TextBlock Text="Clocking Data" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
                 <ItemsControl ItemsSource="{Binding ClockingData}">
@@ -369,7 +397,7 @@
                                         <ColumnDefinition Width="150" />
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Date and Time Details -->
+                                    --><!-- Date and Time Details --><!--
                                     <StackPanel Grid.Column="0" Orientation="Vertical">
                                         <TextBlock Text="Date" FontWeight="Bold" Foreground="#0078D4" />
                                         <TextBlock Text="{Binding Date_of_clocking, StringFormat={}{0:dd/MM/yyyy}}" />
@@ -394,7 +422,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
     </ScrollViewer>
 </UserControl>

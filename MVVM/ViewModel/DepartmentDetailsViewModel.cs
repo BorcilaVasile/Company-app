@@ -1,8 +1,10 @@
-﻿using Administrare_firma.MVVM.Model;
-using Administrare_firma.Core;
+﻿using Administrare_firma.Core;
+using Administrare_firma.MVVM.Model;
 using System;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Administrare_firma.MVVM.ViewModel
 {
@@ -84,7 +86,7 @@ namespace Administrare_firma.MVVM.ViewModel
                     try
                     {
                         // Call the service to delete the employee
-                        EmployeeService.DeleteEmployee(_selectedEmployee.Employee_user);
+                        _mainViewModel._employeeService.DeleteEmployee(_selectedEmployee.Employee_user);
 
                         // Remove the employee from the current department's employee list
                         _currentDepartment.Departments_employees.Remove(_selectedEmployee);

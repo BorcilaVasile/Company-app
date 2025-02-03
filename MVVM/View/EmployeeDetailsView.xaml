@@ -64,6 +64,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <!-- Detalii Angajat -->
@@ -92,26 +93,45 @@
                                 <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding CurrentDepartment.Department.Nume}"  FontSize="18"/>
 
                                 <TextBlock Grid.Row="8" Grid.Column="0" Text="Post:" FontWeight="SemiBold" FontSize="18" />
-                                <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding CurrentEmployee.Post,  Converter={StaticResource NullableTimeConverter}}"  FontSize="18"/>
+                                <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding EmployeePost.Nume}"  FontSize="18"/>
 
-                                <TextBlock Grid.Row="9" Grid.Column="0" Text="Base Salary:" FontWeight="SemiBold" FontSize="18" />
-                                <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding CurrentEmployee.Base_salary}"  FontSize="18"/>
+                                <TextBlock Grid.Row="9" Grid.Column="0" Text="Descriere post:" FontWeight="SemiBold" FontSize="18" />
+                                <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding EmployeePost.Descriere}"  FontSize="18" TextWrapping="Wrap" />
 
-                                <TextBlock Grid.Row="10" Grid.Column="0" Text="Contract Type:" FontWeight="SemiBold" FontSize="18" />
-                                <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding CurrentEmployee.Contract_type}"  FontSize="18"/>
+                                <TextBlock Grid.Row="10" Grid.Column="0" Text="Base Salary:" FontWeight="SemiBold" FontSize="18" />
+                                <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding CurrentEmployee.Base_salary}"  FontSize="18"/>
+
+                                <TextBlock Grid.Row="11" Grid.Column="0" Text="Contract Type:" FontWeight="SemiBold" FontSize="18" />
+                                <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding CurrentEmployee.Contract_type}"  FontSize="18"/>
                             </Grid>
                         </Border>
-                        <Button Content="Edit details"
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Edit details"
                                 Style="{StaticResource ButtonStyle}"
                                 Width="120"
                                 Command="{Binding EditCommand}"
                                 CommandParameter="{Binding CurrentEmployee}" 
                                 Margin="0,20,0,0"
                                 Background="CadetBlue"/>
+                            <Button Content="Create evaluation"
+                                 Style="{StaticResource ButtonStyle}"
+                                 Width="130"
+                                 Command="{Binding CreateEvaluationCommand}"
+                                 CommandParameter="{Binding CurrentEmployee}" 
+                                 Visibility="{Binding IsManager, Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=CreateEvaluationButton}"
+                                 Margin="10,20,0,0"
+                                 Background="CadetBlue"/>
+                            <Button Content="See evaluations"
+                                 Style="{StaticResource ButtonStyle}"
+                                 Width="130"
+                                 Command="{Binding EvaluationCommand}"
+                                 CommandParameter="{Binding CurrentEmployee}" 
+                                 Margin="10,20,0,0"
+                                 Background="CadetBlue"/>   
+                        </StackPanel>
                     </StackPanel>
                 </TabItem>
 
-                <!-- Tab pentru Prezență -->
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

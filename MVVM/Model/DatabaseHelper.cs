@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows;
 
 namespace Administrare_firma.MVVM.Model
 {
+    [NotMapped]
     public class Employee_informations
     {
         public Employee Employee_user { get; set; }
@@ -12,15 +14,7 @@ namespace Administrare_firma.MVVM.Model
         public bool? IsManager { get; set; }
     }
 
-    public class Accounts
-    {
-        public int AccountID { get; set; }
-        public int EmployeeID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set;}
-        public string Password { get; set; }
-    }
-
+    [NotMapped]
     public class DepartmentWithManager
     {
         public Department Department { get; set; }
@@ -33,9 +27,10 @@ namespace Administrare_firma.MVVM.Model
 
     }
 
+    [NotMapped]
     public class Request_informations
     {
-        public Request Request { get; set; }
+        public Requests Request { get; set; }
         public Employee Requester { get; set; }
         public bool Important { get; set; }
     }

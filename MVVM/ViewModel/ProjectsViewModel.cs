@@ -10,14 +10,14 @@ namespace Administrare_firma.MVVM.ViewModel
 {
     public class ProjectsViewModel : ObservableObject
     {
-        private ObservableCollection<Project> _projects;
-        public ObservableCollection<Project> Projects
+        private ObservableCollection<Projects> _projects;
+        public ObservableCollection<Projects> Projects
         {
             get => _projects;
             set
             {
                 _projects = value;
-                OnPropertyChanged(nameof(Project));
+                OnPropertyChanged(nameof(Projects));
             }
         }
         public ProjectsViewModel() {
@@ -26,17 +26,10 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         private void LoadProjects()
         {
-            using (var context = new CompanyDataContext()) 
+            using (var context = new ApplicationDbContext()) 
             {
-                using (var db = new CompanyDataContext()) // Conexiune către baza de date
-                {
-                    // Obține toate proiectele direct
-                    var projectsFromDb = db.Projects.ToList();
-
-                    // Populează colecția ObservableCollection
-                    Projects = new ObservableCollection<Project>(projectsFromDb);
-                }
-
+                    var projectsFromDb = context.Projects.ToList();
+                    Projects = new ObservableCollection<Projects>(projectsFromDb);
             }
         }
     }

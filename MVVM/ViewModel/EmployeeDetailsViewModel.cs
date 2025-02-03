@@ -17,6 +17,8 @@ namespace Administrare_firma.MVVM.ViewModel
         public DepartmentWithManager _currentDepartment { get; set; }
         public RelayCommand NavigateBackCommand { get; set; }
         public RelayCommand EditCommand { get; set; }
+        public RelayCommand CreateEvaluationCommand {  get; set; }
+        public RelayCommand EvaluationCommand { get; set; }
         public Employee _currentEmployee { get; set; }
         private ObservableCollection<Clocking> _attendance;
         public ObservableCollection<Clocking> Attendance
@@ -63,10 +65,20 @@ namespace Administrare_firma.MVVM.ViewModel
 
         public string NavigationSource { get; set; }
 
-        
+        public bool IsManager { get; set; }
 
+        private Post _employeePost;
+        public Post EmployeePost
+        {
+            get => _employeePost;
+            set
+            {
+                _employeePost = value;
+                OnPropertyChanged(nameof(EmployeePost));
+            }
+        }
 
-        public EmployeeDetailsViewModel(DepartmentWithManager departmentWithManager, MainViewModel mainViewModel, Employee employee, string navigationSource)
+        public EmployeeDetailsViewModel(DepartmentWithManager departmentWithManager, MainViewModel mainViewModel, Employee employee, string navigationSource, bool isManager)
         {
             _currentDepartment = departmentWithManager;
             _mainViewModel = mainViewModel;
@@ -74,17 +86,32 @@ namespace Administrare_firma.MVVM.ViewModel
             NavigationSource = navigationSource;
             NavigateBackCommand = new RelayCommand(o => NavigateBack());
             EditCommand = new RelayCommand(o => NavigateToEditView());
+            CreateEvaluationCommand = new RelayCommand(o => NavigateToCreateEvaluationView());
+            EvaluationCommand = new RelayCommand(o => NavigateToEvaluationView());
+            LoadEmployeePost();
             LoadAttendance();
+            IsManager = isManager;
         }
 
-        public EmployeeDetailsViewModel(Employee employee, MainViewModel mainViewModel, string navigationSource)
+        public EmployeeDetailsViewModel(Employee employee, MainViewModel mainViewModel, string navigationSource, bool isManager)
         {
             _currentEmployee = employee;
             _mainViewModel = mainViewModel;
             NavigationSource = navigationSource;
             NavigateBackCommand = new RelayCommand(o => NavigateBack());
             EditCommand = new RelayCommand(o => NavigateToEditView());
+            CreateEvaluationCommand = new RelayCommand(o => NavigateToCreateEvaluationView());
+            EvaluationCommand = new RelayCommand(o => NavigateToEvaluationView());
+            LoadEmployeePost();
             LoadAttendance();
+        }
+        public void LoadEmployeePost()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var employeePost = context.Posts.FirstOrDefault(p => p.ID_post == CurrentEmployee.ID_post);
+                EmployeePost = employeePost; // Setează postul
+            }
         }
 
         public void NavigateBack()
@@ -105,9 +132,18 @@ namespace Administrare_firma.MVVM.ViewModel
         {
             _mainViewModel.NavigateToEmployeeEditView(CurrentDepartment, _currentEmployee, NavigationSource);
         }
+
+        public void NavigateToCreateEvaluationView()
+        {
+            _mainViewModel.NavigateToCreateEvaluationView(CurrentDepartment, CurrentEmployee, NavigationSource);
+        }
+        public void NavigateToEvaluationView()
+        {
+            _mainViewModel.NavigateToEvaluationView(CurrentDepartment, CurrentEmployee, NavigationSource);
+        }
         public void LoadAttendance()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 var attendanceRecords = from clocking in context.Clockings
                                         where clocking.ID_employee == CurrentEmployee.ID

@@ -98,9 +98,9 @@ namespace Administrare_firma.MVVM.ViewModel
             _employeeService = employeeService;
             _currentEmployeeId= employeeId;
 
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
-                var employee = context.Employees.SingleOrDefault(e => e.ID == employeeId);
+                var employee = context.Employee.SingleOrDefault(e => e.ID == employeeId);
                 if (employee != null)
                 {
                     CurrentEmployee = employee;
@@ -108,7 +108,7 @@ namespace Administrare_firma.MVVM.ViewModel
                     var department = context.Departments.SingleOrDefault(d => d.ID_department == employee.ID_department);
                     if (department != null)
                     {
-                        var manager = context.Employees.SingleOrDefault(m => m.ID_department == department.ID_department &&
+                        var manager = context.Employee.SingleOrDefault(m => m.ID_department == department.ID_department &&
                                                 context.Posts.Any(p => p.ID_post == m.ID_post && p.Level_of_importance == 3));
 
                         CurrentDepartment = new DepartmentWithManager
@@ -137,10 +137,10 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         private void LoadEmployeeWithDepartment()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 // Obține angajatul specificat
-                var employee = (from e in context.Employees
+                var employee = (from e in context.Employee
                                 where e.ID == _currentEmployeeId
                                 select new
                                 {
@@ -169,7 +169,7 @@ namespace Administrare_firma.MVVM.ViewModel
                 // Obține departamentul și managerul asociat
                 var departmentWithManager = (from department in context.Departments
                                              where department.ID_department == employee.ID_department
-                                             join manager in context.Employees
+                                             join manager in context.Employee
                                              on department.ID_department equals manager.ID_department into managerGroup
                                              from manager in managerGroup
                                              .Where(m => (context.Posts

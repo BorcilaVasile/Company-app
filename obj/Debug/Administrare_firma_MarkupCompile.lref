@@ -1,8 +1,10 @@
-﻿
+﻿C:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\App.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\AddEmployeeView.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\CreateEvaluationView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\EmployeeDetailsView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\EmployeeEditView.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\EvaluationView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\MainPageWindow.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\DepartmentDetailsView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\DepartmentsView.xaml;;
@@ -10,6 +12,7 @@ FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\HomeView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\LoginView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\MainView.xaml;;
+FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\NotificationsView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\ProjectsView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\RequestDetailsView.xaml;;
 FC:\Users\HUAWEI\Documents\Facultate\Anul 3\Administrare_baze_de_date\CompanyApp\MVVM\View\SignUpView.xaml;;

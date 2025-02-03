@@ -47,11 +47,33 @@ namespace Administrare_firma.MVVM.ViewModel
 
         private void AcceptRequest(object parameter)
         {
-            var requestInfo = parameter as Request_informations; 
+            var requestInfo = parameter as Request_informations;
             if (requestInfo != null)
             {
                 service.AcceptRequest(requestInfo.Request);
                 requestInfo.Request.Status = "Approved";
+
+                using (var context = new ApplicationDbContext())
+                {
+                    var sender = context.Employee.FirstOrDefault(e => e.ID == _userID);
+                    var receiver = context.Employee.FirstOrDefault(e => e.ID == requestInfo.Request.RequesterID);
+
+                    if (sender != null && receiver != null)
+                    {
+                        var notification = new Notification
+                        {
+                            ID_receiver = receiver.ID,
+                            Sender_Name = $"{sender.First_name} {sender.Last_name}",
+                            Sender_Position = context.Posts.FirstOrDefault(p => p.ID_post == sender.ID_post)?.Nume,
+                            Notification_Details = $"Your request of type '{requestInfo.Request.RequestType}' has been approved by {sender.First_name} {sender.Last_name}.",
+                            Seen = false,
+                            Date = DateTime.Now
+                        };
+
+                        context.Notifications.Add(notification);
+                        context.SaveChanges();
+                    }
+                }
             }
             _mainViewModel.NavigateToHomeView(_userID,_isAdmin,_isManager);
         }
@@ -62,6 +84,28 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 service.RejectRequest(requestInfo.Request);
                 requestInfo.Request.Status = "Rejected";
+
+                using (var context = new ApplicationDbContext())
+                {
+                    var sender = context.Employee.FirstOrDefault(e => e.ID == _userID);
+                    var receiver = context.Employee.FirstOrDefault(e => e.ID == requestInfo.Request.RequesterID);
+
+                    if (sender != null && receiver != null)
+                    {
+                        var notification = new Notification
+                        {
+                            ID_receiver = receiver.ID,
+                            Sender_Name = $"{sender.First_name} {sender.Last_name}",
+                            Sender_Position = context.Posts.FirstOrDefault(p => p.ID_post == sender.ID_post)?.Nume,
+                            Notification_Details = $"Your request of type '{requestInfo.Request.RequestType}' has been rejected by {sender.First_name} {sender.Last_name}.",
+                            Seen = false,
+                            Date = DateTime.Now
+                        };
+
+                        context.Notifications.Add(notification);
+                        context.SaveChanges();
+                    }
+                }
             }
             _mainViewModel.NavigateToHomeView(_userID, _isAdmin, _isManager);
         }

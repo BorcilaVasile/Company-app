@@ -1,14 +1,9 @@
-﻿using Administrare_firma.Core;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Administrare_firma.Core;
 
 namespace Administrare_firma.MVVM.ViewModel
 {
@@ -268,9 +263,9 @@ namespace Administrare_firma.MVVM.ViewModel
             }
 
 
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
-                var query = context.Employees
+                var query = context.Employee
                     .FirstOrDefault(employee => (employee.First_name + " " + employee.Last_name).Equals(Fullname) &&
                 employee.Email.Equals(Email));
 
@@ -284,8 +279,8 @@ namespace Administrare_firma.MVVM.ViewModel
                         Email = Email
                     };
 
-                    context.Accounts.InsertOnSubmit(newAccount);
-                    context.SubmitChanges();
+                    context.Accounts.Add(newAccount);
+                    context.SaveChanges();
 
 
                     MessageBox.Show("Account created successfully!");

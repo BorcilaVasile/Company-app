@@ -1,14 +1,19 @@
 ﻿<UserControl x:Class="Administrare_firma.MVVM.View.MainView"
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:viewModel="clr-namespace:Administrare_firma.MVVM.ViewModel"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:local="clr-namespace:Administrare_firma"
 			xmlns:view="clr-namespace:Administrare_firma.MVVM.View"
-            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-            xmlns:core="clr-namespace:Administrare_firma.Core">
+            xmlns:viewModel="clr-namespace:Administrare_firma.MVVM.ViewModel"
+            xmlns:core="clr-namespace:Administrare_firma.Core"
+            d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+            mc:Ignorable="d"   >
 
     <UserControl.Resources>
         <core:BoolToStringConverter x:Key="BoolToStringConverter" />
+        <core:NotificationColorConverter x:Key="NotificationColorConverter"/>
+        <core:NumberOfNotificationToStringConverter x:Key="NotificationConverter"/>
     </UserControl.Resources>
 
     <Grid Background="Transparent">
@@ -69,6 +74,14 @@
                                         Command="{Binding CurrentEmployeeDetailsViewCommand}"
                                         Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=EditInfoButton}"
                                         Tag="pack://application:,,,/MVVM/View/Icons/account.png"/>
+                        <RadioButton Content="{Binding NumberOfNotifications, Converter={StaticResource NotificationConverter}, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{Binding NumberOfNotifications, Converter={StaticResource NotificationColorConverter}}"
+                                     Height="50"
+                                     FontSize="14"
+                                     IsChecked="False"
+                                     Style="{StaticResource MenuButtonTheme}"
+                                    Command="{Binding NotificationViewCommand}"
+                                    Tag="pack://application:,,,/MVVM/View/Icons/notification.png"/>
                     </StackPanel>
                     <RadioButton Content="Logout"
                                  Style="{StaticResource MenuButtonTheme}"

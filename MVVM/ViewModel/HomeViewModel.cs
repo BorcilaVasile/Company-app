@@ -30,7 +30,7 @@ namespace Administrare_firma.MVVM.ViewModel
         public RelayCommand CreateRequestCommand { get; }
         public RelayCommand SetTimeCommand { get; }
         public RelayCommand SortRequestsCommand { get; }
-        public RelayCommand SetBreakTimeCommand {  get; }
+        public RelayCommand SetBreakTimeCommand { get; }
         public MainViewModel _mainViewModel;
 
         private string _selectedSortOption;
@@ -41,7 +41,7 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 _selectedSortOption = value;
                 OnPropertyChanged(nameof(SelectedSortOption));
-                SortRequests(); 
+                SortRequests();
             }
         }
 
@@ -221,6 +221,37 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         private TimeSpan _totalPauseDuration = TimeSpan.Zero;
 
+        private decimal _totalAmountDue;
+        public decimal TotalAmountDue
+        {
+            get => _totalAmountDue;
+            set
+            {
+                _totalAmountDue = value;
+                OnPropertyChanged(nameof(TotalAmountDue));
+            }
+        }
+
+        private int _totalWorkedHours;
+        public int TotalWorkedHours
+        {
+            get => _totalWorkedHours;
+            set{
+                _totalWorkedHours=value;
+                OnPropertyChanged(nameof(TotalWorkedHours));
+                } 
+        }
+
+        private int _necessaryHours;
+        public int NecessaryHours
+        {
+            get => _necessaryHours;
+            set
+            {
+                _necessaryHours = value;
+                OnPropertyChanged(nameof(NecessaryHours));
+            }
+        }
 
         public HomeViewModel(MainViewModel mainViewModel, int employeeID, bool IsAdmin, bool IsManager)
         {
@@ -231,12 +262,14 @@ namespace Administrare_firma.MVVM.ViewModel
             _isEmployee= !IsAdmin && !IsManager;
             _working = false;
             _pause = false;
+            _selectedSortOption = "All";
 
             ViewRequestDetailsCommand = new RelayCommand(o => NavigateToRequestDetailsView(o));
             CreateRequestCommand=new RelayCommand(o => NavigateToCreateRequestView());
             SetTimeCommand = new RelayCommand(o => SetTime());
             SetBreakTimeCommand = new RelayCommand(o => SetBreak());
 
+            Requests = new ObservableCollection<Request_informations>();
             LoadRequestsFromDatabase();
             LoadStatisticsFromDatabase();
             LoadClockingData();
@@ -289,83 +322,115 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         private void LoadStatisticsFromDatabase()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
+                List<Employee> relevantEmployees;
+
                 if (IsAdmin)
                 {
-                    ActiveEmployeesCount = context.Employees.Count(e => e.Status == "active");
-
-                    InactiveEmployeesCount = context.Employees.Count(e => e.Status == "inactive");
-
-                    FullTimeEmployeesCount = context.Employees.Count(e => e.Contract_type == "full-time");
-
-                    RemoteEmployeesCount = context.Employees.Count(e => e.Contract_type == "remote");
-
-                    PartTimeEmployeesCount = context.Employees.Count(e => e.Contract_type == "part-time");
+                    relevantEmployees = context.Employee.ToList();
                 }
                 else if (IsManager)
                 {
-                    var managerDepartmentID = context.Employees
-                                            .Where(e => e.ID == employeeID)
-                                            .Select(e => e.ID_department)
-                                            .FirstOrDefault();
-                    ActiveEmployeesCount = context.Employees.Count(e => e.Status == "active" && e.ID_department == managerDepartmentID && e.ID != employeeID);
-                    InactiveEmployeesCount = context.Employees.Count(e => e.Status == "inactive" && e.ID_department == managerDepartmentID && e.ID != employeeID);
-                    FullTimeEmployeesCount = context.Employees.Count(e => e.Contract_type == "full-time" && e.ID_department == managerDepartmentID && e.ID != employeeID);
-                    RemoteEmployeesCount = context.Employees.Count(e => e.Contract_type == "remote" && e.ID_department == managerDepartmentID && e.ID != employeeID);
-                    PartTimeEmployeesCount = context.Employees.Count(e => e.Contract_type == "part-time" && e.ID_department == managerDepartmentID && e.ID != employeeID);
-                }
-            }
-        }
-        private void LoadRequestsFromDatabase()
-        {
-            using (var context = new CompanyDataContext())
-            {
-                if (IsAdmin)
-                {
-                    var departmentsWithoutManagers = context.Departments
-                                                   .Where(d => !context.Employees.Any(e => e.ID_department == d.ID_department && !context.Posts.Any(p => p.ID_post == e.ID_post && p.Level_of_importance == 3)))
-                                                   .Select(d => d.ID_department)
-                                                   .ToList();
-                    var requests = context.Requests
-                                .Select(r => new Request_informations
-                                {
-                                    Request = r,
-                                    Requester = context.Employees.FirstOrDefault(e => e.ID == r.RequesterID),
-                                    Important = context.Employees.Any(e => e.ID == r.RequesterID &&
-                                                                           (context.Posts.Any(p => p.ID_post == e.ID_post && p.Level_of_importance == 3) ||
-                                                                           departmentsWithoutManagers.Contains((int)e.ID_department)))
-                                })
-                                .ToList();
-                    Requests = new ObservableCollection<Request_informations>(requests);
-                }
-                else if (IsManager)
-                {
-                    var managerDepartmentID = context.Employees
-                                            .Where(e => e.ID == employeeID)
-                                            .Select(e => e.ID_department)
-                                            .FirstOrDefault();
-                    if (managerDepartmentID == null)
+                    var managerDepartmentID = context.Employee
+                                                     .Where(e => e.ID == employeeID)
+                                                     .Select(e => e.ID_department)
+                                                     .FirstOrDefault();
+
+                    if (managerDepartmentID == 0)
                     {
                         throw new InvalidOperationException("Manager not found or department not assigned.");
                     }
 
+                    relevantEmployees = context.Employee
+                                               .Where(e => e.ID_department == managerDepartmentID && e.ID != employeeID)
+                                               .ToList();
+                }
+                else
+                {
+                    return; 
+                }
+
+                ActiveEmployeesCount = relevantEmployees.Count(e => e.Status == "active");
+                InactiveEmployeesCount = relevantEmployees.Count(e => e.Status == "inactive");
+                FullTimeEmployeesCount = relevantEmployees.Count(e => e.Contract_type == "full-time");
+                RemoteEmployeesCount = relevantEmployees.Count(e => e.Contract_type == "remote");
+                PartTimeEmployeesCount = relevantEmployees.Count(e => e.Contract_type == "part-time");
+            }
+        }
+
+        private void LoadRequestsFromDatabase()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var employees = context.Employee.ToList();
+                var posts = context.Posts.ToList();
+
+                if (IsAdmin)
+                {   var postsWithImportance3 = posts
+                                               .Where(p => p.Level_of_importance == 3)
+                                               .Select(p => p.ID_post)
+                                               .ToList();
+
+                    var departmentsWithoutManagers = context.Departments
+                                                .Where(d => !context.Employee.Any(e => e.ID_department == d.ID_department && postsWithImportance3.Contains((int)e.ID_post)))
+                                                .Select(d => d.ID_department)
+                                                .ToList();
+
+
                     var requests = context.Requests
-                                    .Where(r => context.Employees.Any(e => e.ID == r.RequesterID && e.ID_department == managerDepartmentID && e.ID != employeeID))
-                                    .Select(r => new Request_informations
-                                    {
-                                        Request = r,
-                                        Requester = context.Employees.FirstOrDefault(e => e.ID == r.RequesterID),
-                                        Important = false 
-                                    })
-                                    .ToList();
+                                          .ToList() // Preluăm toate cererile înainte de a aplica transformarea
+                                          .Select(r => new Request_informations
+                                          {
+                                              Request = r,
+                                              Requester = employees.FirstOrDefault(e => e.ID == r.RequesterID),
+                                              Important = employees.Any(e => e.ID == r.RequesterID &&
+                                                                              (postsWithImportance3.Contains((int)e.ID_post) ||
+                                                                               departmentsWithoutManagers.Contains((int)e.ID_department)))
+                                          })
+                                          .ToList();
 
                     Requests = new ObservableCollection<Request_informations>(requests);
                 }
+                else if (IsManager)
+                {
+                    var managerDepartmentID = employees
+                                              .Where(e => e.ID == employeeID)
+                                              .Select(e => e.ID_department)
+                                              .FirstOrDefault();
 
+                    if (managerDepartmentID == 0)
+                    {
+                        throw new InvalidOperationException("Manager not found or department not assigned.");
+                    }
 
+                    var requestsFromDb = context.Requests
+                                       .Where(r => r.RequesterID != employeeID)
+                                       .ToList();
+
+                    //var requests = context.Requests
+                    //                      .Where(r => employees.Any(e => e.ID == r.RequesterID && e.ID_department == managerDepartmentID && e.ID != employeeID))
+                    //                      .ToList()
+                    //                      .Select(r => new Request_informations
+                    //                      {
+                    //                          Request = r,
+                    //                          Requester = employees.FirstOrDefault(e => e.ID == r.RequesterID),
+                    //                          Important = false
+                    //                      })
+                    //                      .ToList();
+
+                    var requests = requestsFromDb.Select(r => new Request_informations
+                    {
+                        Request = r,
+                        Requester = employees.FirstOrDefault(e => e.ID == r.RequesterID), // Folosește lista de angajați deja încărcată
+                        Important = false
+                    }).ToList();
+
+                    Requests = new ObservableCollection<Request_informations>(requests);
+                }
             }
         }
+
 
         private void SortRequests()
         {
@@ -401,6 +466,10 @@ namespace Administrare_firma.MVVM.ViewModel
                     SortedRequests = new ObservableCollection<Request_informations>(Requests.Where(r => r.Request.RequestType == "Marire salariu"));
                     break;
 
+                case "All":
+                    SortedRequests = new ObservableCollection<Request_informations>(Requests);
+                    break;
+
                 default:
                     SortedRequests = new ObservableCollection<Request_informations>(Requests);
                     break;
@@ -428,42 +497,53 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         private void SetTime()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 if (Working)
                 {
                     var currentRecord = context.Clockings
-                        .FirstOrDefault(c => c.ID_employee == employeeID && c.End_hour == null);
+                        .FirstOrDefault(c => c.ID_employee == this.employeeID && c.End_hour == null);
 
                     if (currentRecord != null)
                     {
                         currentRecord.End_hour = DateTime.Now.TimeOfDay;
                         currentRecord.BreakHours = (decimal)_totalPauseDuration.TotalHours;
-                        context.SubmitChanges();
-                        Console.WriteLine($"Clocking closed with BreakHours: {currentRecord.BreakHours}");
-                        _totalPauseDuration = TimeSpan.Zero;
-                }
 
-                    _workSessionTimer.Stop(); // Stop auto-close timer
+                        context.SaveChanges();
+                        Console.WriteLine($"Clocking closed with BreakHours: {currentRecord.BreakHours}");
+
+                        TimeSpan duration = (TimeSpan)currentRecord.End_hour - (TimeSpan)currentRecord.Start_hour;
+                        double totalHoursWorked = duration.Hours + duration.Minutes / 60.0 + 10;
+                        var employee = context.Employee.FirstOrDefault(e => e.ID == this.employeeID);
+
+                        if (employee != null)
+                        {
+                            employee.HoursWorkedThisMonth += (int)totalHoursWorked;
+                            context.SaveChanges();
+                        }
+
+                        _totalPauseDuration = TimeSpan.Zero;
+                    }
+
+                    _workSessionTimer.Stop();
                     Working = false;
                 }
                 else
                 {
-                    // Start work session
                     var newClocking = new Clocking
                     {
-                        ID_employee = employeeID,
+                        ID_employee = this.employeeID,
                         Date_of_clocking = DateTime.Now.Date,
                         Start_hour = DateTime.Now.TimeOfDay
                     };
 
-                    context.Clockings.InsertOnSubmit(newClocking);
-                    context.SubmitChanges();
+                    context.Clockings.Add(newClocking);
+                    context.SaveChanges();
 
                     _workStartTime = DateTime.Now;
-                    _workSessionTimer.Start(); // Start auto-close timer
+
+                    _workSessionTimer.Start();
                     Working = true;
-                
                 }
             }
             LoadClockingData();
@@ -474,7 +554,7 @@ namespace Administrare_firma.MVVM.ViewModel
             {
                 if (_pauseStartTime.HasValue)
                 {
-                    var pauseDuration = DateTime.Now - _pauseStartTime.Value.Add(TimeSpan.FromSeconds(-3000));
+                    var pauseDuration = DateTime.Now - _pauseStartTime.Value.Add(TimeSpan.FromSeconds(-300));
                     _totalPauseDuration += pauseDuration;
 
                     Console.WriteLine($"Updated pause duration: {_totalPauseDuration.TotalMinutes} minutes");
@@ -492,16 +572,31 @@ namespace Administrare_firma.MVVM.ViewModel
 
         private void AutoCloseWorkSession(object sender, ElapsedEventArgs e)
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 var currentRecord = context.Clockings
-                    .FirstOrDefault(c => c.ID_employee == employeeID && c.End_hour == null);
+                    .FirstOrDefault(c => c.ID_employee == this.employeeID && c.End_hour == null);
 
                 if (currentRecord != null)
                 {
                     currentRecord.End_hour = DateTime.Now.TimeOfDay;
                     currentRecord.BreakHours = (decimal)_totalPauseDuration.TotalHours;
-                    context.SubmitChanges();
+                    context.SaveChanges();
+                    Console.WriteLine("Auto-closed work session.");
+
+                    TimeSpan duration = (TimeSpan)currentRecord.End_hour - (TimeSpan)currentRecord.Start_hour;
+                    double totalHoursWorked = duration.Hours + duration.Minutes / 60.0 - (double)currentRecord.BreakHours+10;
+                    var employee = context.Employee.FirstOrDefault(emp => emp.ID == this.employeeID);
+
+                    if (employee != null)
+                    {
+                        employee.HoursWorkedThisMonth += (int)totalHoursWorked;
+                        context.SaveChanges();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No active clocking session found.");
                 }
 
                 Working = false;
@@ -511,7 +606,7 @@ namespace Administrare_firma.MVVM.ViewModel
         }
         public void LoadClockingData()
         {
-            using (var context = new CompanyDataContext())
+            using (var context = new ApplicationDbContext())
             {
                 var clockingRecords = context.Clockings
                     .Where(c => c.ID_employee == employeeID && employeeID != 0) // Exclude admin
@@ -520,6 +615,35 @@ namespace Administrare_firma.MVVM.ViewModel
                     .ToList();
 
                 ClockingData = new ObservableCollection<Clocking>(clockingRecords);
+
+                int totalHoursWorked = context.Employee
+                               .Where(e => e.ID == employeeID)
+                               .Select(e => e.HoursWorkedThisMonth)
+                               .FirstOrDefault();
+
+                int base_salary= context.Employee
+                               .Where(e => e.ID == employeeID)
+                               .Select(e => (int)e.Base_salary)
+                               .FirstOrDefault();
+
+
+                int free_days =(int)context.Requests
+                                .Where(r => r.Status == "Approved" && r.RequesterID == this.employeeID &&
+                                           (r.RequestType == "Concediu" || r.RequestType == "Zile Libere"))
+                                .Select(r => r.DurationDays)
+                                .DefaultIfEmpty(0) 
+                                .Sum();
+                int? free_hours= (int)context.Requests
+                                .Where(r => r.Status == "Approved" && r.RequesterID == this.employeeID && r.RequestType == "Zile Libere" )
+                                .Select(r => r.DurationDays ?? 0)
+                                .DefaultIfEmpty(0)
+                                .Sum();
+
+                Console.WriteLine($"Free Days: {free_days}, Free Hours: {free_hours}");
+
+                this.NecessaryHours = 150-(int)free_hours-8*(int)free_days;
+                this.TotalWorkedHours = totalHoursWorked;
+                this.TotalAmountDue= totalHoursWorked*base_salary;
             }
         }
 
